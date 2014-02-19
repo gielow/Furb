@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{34918B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetodosQuantitativos.Dominio", "source\MetodosQuantitativos.Dominio\MetodosQuantitativos.Dominio.csproj", "{00098F4F-8917-4429-BF64-D6D8160DE035}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetodosQuantitativos.Testes", "testes\MetodosQuantitativos.Testes\MetodosQuantitativos.Testes.csproj", "{05111511-0DFF-4A47-80C2-AC701CD332E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +19,16 @@ Global
 		{00098F4F-8917-4429-BF64-D6D8160DE035}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00098F4F-8917-4429-BF64-D6D8160DE035}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00098F4F-8917-4429-BF64-D6D8160DE035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05111511-0DFF-4A47-80C2-AC701CD332E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05111511-0DFF-4A47-80C2-AC701CD332E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05111511-0DFF-4A47-80C2-AC701CD332E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05111511-0DFF-4A47-80C2-AC701CD332E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{00098F4F-8917-4429-BF64-D6D8160DE035} = {2BE9A4C6-8150-4F4E-ACC5-3E04815B79EE}
+		{05111511-0DFF-4A47-80C2-AC701CD332E2} = {34918B34-DD34-41A3-A9DA-964BEC6EA9B4}
 	EndGlobalSection
 EndGlobal
