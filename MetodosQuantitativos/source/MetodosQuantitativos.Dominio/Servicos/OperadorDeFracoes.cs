@@ -2,12 +2,12 @@
 
 namespace MetodosQuantitativos.Dominio.Servicos
 {
-    public class OperadorDeFracoes
+    public class OperadorDeFracoesInt
     {
-        public Fracao<T> Somar<T>(Fracao<T> fracao1, Fracao<T> fracao2) where T : Int
+        public Fracao<Int> Somar(Fracao<Int> fracao1, Fracao<Int> fracao2)
         {
-            var numeradorResultado = fracao1.Numerador.Somar(fracao2.Numerador);
-            return new Fracao<T>(numeradorResultado, fracao1.Denominador);
+            var numeradorResultado = fracao1.Numerador + fracao2.Numerador;
+            return new Fracao<Int>(numeradorResultado, fracao1.Denominador);
         }
     }
 }

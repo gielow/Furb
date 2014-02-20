@@ -1,6 +1,6 @@
 ﻿namespace MetodosQuantitativos.Dominio.Entidades
 {
-    public class Fracao<T> where T : INumero
+    public class Fracao<T>
     {
         public Fracao(T numerador, T denominador)
         {
@@ -10,5 +10,10 @@
 
         public T Numerador { get; set; }
         public T Denominador { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}/{1}", Numerador, Denominador);
+        }
     }
 }
