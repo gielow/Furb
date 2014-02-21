@@ -1,6 +1,8 @@
-﻿namespace MetodosQuantitativos.Dominio.Entidades
+﻿using System;
+
+namespace MetodosQuantitativos.Dominio.Entidades
 {
-    public class Fracao<T>
+    public class Fracao<T> where T: IComparable<T>
     {
         public Fracao(T numerador, T denominador)
         {
