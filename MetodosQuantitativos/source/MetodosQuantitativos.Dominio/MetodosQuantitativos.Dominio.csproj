@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Entidades\Fracao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servicos\OperadorDeFracoes.cs" />
+    <Compile Include="Servicos\OperadorDeFracoesBigInteger.cs" />
+    <Compile Include="Servicos\OperadorDeFracoesLong.cs" />
+    <Compile Include="Servicos\OperadorDeFracoesInt.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

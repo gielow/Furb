@@ -2,7 +2,7 @@
 
 namespace MetodosQuantitativos.Dominio.Entidades
 {
-    public class Fracao<T> where T: IComparable<T>
+    public class Fracao<T> where T: struct 
     {
         public Fracao(T numerador, T denominador)
         {
