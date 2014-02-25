@@ -9,7 +9,9 @@ namespace MetodosQuantitativos.Dominio.Servicos
         {
             var fracaoResultado = new Fracao<long>(fracao.Numerador, fracao.Denominador);
             var divisor = 2;
-            while (divisor <= Math.Min(fracaoResultado.Numerador, fracaoResultado.Denominador))
+            while (divisor <= Math.Min(
+                fracaoResultado.Numerador < 0 ? fracaoResultado.Numerador * -1 : fracaoResultado.Numerador,
+                fracaoResultado.Denominador < 0 ? fracaoResultado.Denominador * -1 : fracaoResultado.Denominador))
             {
                 if (fracaoResultado.Numerador % divisor == 0 && fracaoResultado.Denominador % divisor == 0)
                     fracaoResultado = new Fracao<long>(fracaoResultado.Numerador / divisor, fracaoResultado.Denominador / divisor);
@@ -21,10 +23,10 @@ namespace MetodosQuantitativos.Dominio.Servicos
 
         public Fracao<long> Somar(Fracao<long> fracao1, Fracao<long> fracao2)
         {
-            return fracao1.Denominador == fracao2.Denominador ? SomarDenominadorIgual(fracao1, fracao2) : SomarDenominadorDiferente(fracao1, fracao2);
+            return Simplificar(fracao1.Denominador == fracao2.Denominador ? SomarDenominadorIgual(fracao1, fracao2) : SomarDenominadorDiferente(fracao1, fracao2));
         }
 
-        private Fracao<long> SomarDenominadorDiferente(Fracao<long> fracao1, Fracao<long> fracao2)
+        private static Fracao<long> SomarDenominadorDiferente(Fracao<long> fracao1, Fracao<long> fracao2)
         {
             var resultNumerador1 = fracao1.Numerador * fracao2.Denominador;
             var resultNumerador2 = fracao2.Numerador * fracao1.Denominador;
@@ -33,7 +35,7 @@ namespace MetodosQuantitativos.Dominio.Servicos
             return new Fracao<long>(numerador, denominador);
         }
 
-        private Fracao<long> SomarDenominadorIgual(Fracao<long> fracao1, Fracao<long> fracao2)
+        private static Fracao<long> SomarDenominadorIgual(Fracao<long> fracao1, Fracao<long> fracao2)
         {
             var numeradorResultado = fracao1.Numerador + fracao2.Numerador;
             return new Fracao<long>(numeradorResultado, fracao1.Denominador);
@@ -41,7 +43,7 @@ namespace MetodosQuantitativos.Dominio.Servicos
 
         public Fracao<long> Subtrair(Fracao<long> fracao1, Fracao<long> fracao2)
         {
-            return fracao1.Denominador == fracao2.Denominador ? SubtrairDenominadorIgual(fracao1, fracao2) : SubtrairDenominadorDiferente(fracao1, fracao2);
+            return Simplificar(fracao1.Denominador == fracao2.Denominador ? SubtrairDenominadorIgual(fracao1, fracao2) : SubtrairDenominadorDiferente(fracao1, fracao2));
         }
 
         private static Fracao<long> SubtrairDenominadorIgual(Fracao<long> fracao1, Fracao<long> fracao2)
@@ -61,12 +63,12 @@ namespace MetodosQuantitativos.Dominio.Servicos
 
         public Fracao<long> Multiplicar(Fracao<long> fracao1, Fracao<long> fracao2)
         {
-            return new Fracao<long>(fracao1.Numerador*fracao2.Numerador, fracao1.Denominador*fracao2.Denominador);
+            return Simplificar(new Fracao<long>(fracao1.Numerador*fracao2.Numerador, fracao1.Denominador*fracao2.Denominador));
         }
 
         public Fracao<long> Dividir(Fracao<long> fracao1, Fracao<long> fracao2)
         {
-            return new Fracao<long>(fracao1.Numerador*fracao2.Denominador, fracao1.Denominador*fracao2.Numerador);
+            return Simplificar(new Fracao<long>(fracao1.Numerador*fracao2.Denominador, fracao1.Denominador*fracao2.Numerador));
         }
 
         public Fracao<long> Potenciar(Fracao<long> fracao, int potencia)
@@ -76,7 +78,7 @@ namespace MetodosQuantitativos.Dominio.Servicos
             {
                 fracaoResultado = Multiplicar(fracaoResultado, fracao);
             }
-            return fracaoResultado;
+            return Simplificar(fracaoResultado);
         }
 
         public Fracao<long> Raiz(Fracao<long> fracao, int raiz)
