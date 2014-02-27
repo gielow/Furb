@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unidade\Dominio\Entidades\ElementoEquacaoTeste.cs" />
+    <Compile Include="Unidade\Dominio\Entidades\EquacaoTeste.cs" />
     <Compile Include="Unidade\Dominio\Entidades\FracaoTeste.cs" />
     <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesBigIntTeste.cs" />
     <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesLongTeste.cs" />
