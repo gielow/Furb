@@ -19,7 +19,7 @@ namespace MetodosQuantitativos.Dominio.Entidades
 
         public override string ToString()
         {
-            return string.Join("", Elementos.Select(x => x.ToString()));
+            return string.Join("", Elementos.Select(x => (x.Coeficiente.ToString().StartsWith("-") ? "" : "+") + x.ToString()));
         }
     }
 }

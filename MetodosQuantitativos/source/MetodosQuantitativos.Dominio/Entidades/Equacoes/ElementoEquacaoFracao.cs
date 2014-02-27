@@ -1,11 +1,11 @@
 ﻿namespace MetodosQuantitativos.Dominio.Entidades
 {
-    public class ElementoEquacao
+    public class ElementoEquacaoFracao<T> where T : struct
     {
-        public int Coeficiente { get; set; }
+        public Fracao<T> Coeficiente { get; set; }
         public int Expoente { get; set; }
 
-        public ElementoEquacao(int coeficiente, int expoente)
+        public ElementoEquacaoFracao(Fracao<T> coeficiente, int expoente)
         {
             Coeficiente = coeficiente;
             Expoente = expoente;
@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return Coeficiente.ToString("+#;-#") + "x^" + Expoente;
+            return Coeficiente + "x^" + Expoente;
         }
     }
 }
