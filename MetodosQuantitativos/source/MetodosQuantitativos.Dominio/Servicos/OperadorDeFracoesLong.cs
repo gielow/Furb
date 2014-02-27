@@ -73,6 +73,10 @@ namespace MetodosQuantitativos.Dominio.Servicos
 
         public Fracao<long> Potenciar(Fracao<long> fracao, int potencia)
         {
+            if (potencia == 0)
+            {
+                return new FracaoLong(1);
+            }
             var fracaoResultado = new Fracao<long>(fracao.Numerador, fracao.Denominador);
             for (var i = 1; i < potencia; i++)
             {

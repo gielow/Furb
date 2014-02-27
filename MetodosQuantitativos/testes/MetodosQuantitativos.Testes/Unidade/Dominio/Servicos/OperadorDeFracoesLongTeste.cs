@@ -100,6 +100,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             resultado.Denominador.Should().Be(denominadorResultado);
         }
 
+        [TestCase(3, 5, 0, 1, 1)]
         [TestCase(3, 5, 3, 27, 125)]
         public void potenciacao_de_fracoes(long numerador, long denominador, int potencia, long numeradorResultado, long denominadorResultado)
         {

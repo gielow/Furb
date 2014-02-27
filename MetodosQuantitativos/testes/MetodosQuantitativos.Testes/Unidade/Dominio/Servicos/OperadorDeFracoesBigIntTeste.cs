@@ -102,6 +102,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             resultado.Denominador.Should().Be(BigInteger.Parse(denominadorResultado));
         }
 
+        [TestCase("300000000000000000000", "500000000000000000000", 0, "1", "1")]
         [TestCase("300000000000000000000", "500000000000000000000", 3, "27", "125")]
         public void potenciacao_de_fracoes(string numerador, string denominador, int potencia, string numeradorResultado, string denominadorResultado)
         {
