@@ -1,20 +1,19 @@
 ﻿using FluentAssertions;
-using MetodosQuantitativos.Dominio.Entidades;
+using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 using MetodosQuantitativos.Dominio.Servicos;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
 {
     public class OperadorDeEquacoesComFracaoTeste
     {
-        private OperadorDeEquacoesComFracao operadorDeEquacoes;
+        private OperadorDeEquacoesComFracao<int> operadorDeEquacoes;
 
         [SetUp]
         public void InicializarTeste()
         {
-            operadorDeEquacoes = new OperadorDeEquacoesComFracao();
+            operadorDeEquacoes = new OperadorDeEquacoesComFracao<int>(new OperadorDeFracoesInt());
         }
 
         [Test]

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MetodosQuantitativos.Dominio.Entidades
+namespace MetodosQuantitativos.Dominio.Entidades.Equacoes
 {
     public class EquacaoFracao<T> where T : struct
     {

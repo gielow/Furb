@@ -1,22 +1,27 @@
-﻿using System;
-using System.Linq;
-using MetodosQuantitativos.Dominio.Entidades;
+﻿using MetodosQuantitativos.Dominio.Entidades;
+using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 
 namespace MetodosQuantitativos.Dominio.Servicos
 {
-    public class OperadorDeEquacoesComFracao
+    public class OperadorDeEquacoesComFracao<T> where T : struct 
     {
-        private OperadorDeFracoesInt operadorDeFracoes;
+        private readonly IOperadorDeFracoes<T> operadorDeFracoes;
 
-        public OperadorDeEquacoesComFracao()
+        public OperadorDeEquacoesComFracao(IOperadorDeFracoes<T> operadorDeFracoes)
         {
-            this.operadorDeFracoes = ope
+            this.operadorDeFracoes = operadorDeFracoes;
         }
 
-        public Fracao<T> Calcular<T>(EquacaoFracao<T> equacao, Fracao<T> valorDeX) where T : struct
+        public Fracao<T> Calcular(EquacaoFracao<T> equacao, Fracao<T> valorDeX)
         {
-            return equacao.Elementos[0].Coeficiente;
-            //return equacao.Elementos.Sum(elementoDaEquacao => elementoDaEquacao.Coeficiente*(int) Math.Pow(valorDeX, elementoDaEquacao.Expoente));
+            var resultado = operadorDeFracoes.ValorDefault();
+            foreach (var elementoEquacao in equacao.Elementos)
+            {
+                var resultP = operadorDeFracoes.Potenciar(valorDeX, elementoEquacao.Expoente);
+                var resultM = operadorDeFracoes.Multiplicar(elementoEquacao.Coeficiente, resultP);
+                resultado = operadorDeFracoes.Somar(resultado, resultM);
+            }
+            return resultado;
         }
     }
 }

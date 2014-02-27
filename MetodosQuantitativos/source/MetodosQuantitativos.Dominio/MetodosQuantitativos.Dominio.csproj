@@ -50,6 +50,7 @@
     <Compile Include="Entidades\Equacoes\Equacao.cs" />
     <Compile Include="Entidades\Fracoes\Fracao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicos\IOperadorDeFracoes.cs" />
     <Compile Include="Servicos\OperadorDeEquacoesComFracao.cs" />
     <Compile Include="Servicos\OperadorDeEquacoes.cs" />
     <Compile Include="Servicos\OperadorDeFracoesBigInteger.cs" />

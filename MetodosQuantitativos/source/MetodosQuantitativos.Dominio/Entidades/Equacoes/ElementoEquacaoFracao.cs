@@ -1,4 +1,4 @@
-﻿namespace MetodosQuantitativos.Dominio.Entidades
+﻿namespace MetodosQuantitativos.Dominio.Entidades.Equacoes
 {
     public class ElementoEquacaoFracao<T> where T : struct
     {

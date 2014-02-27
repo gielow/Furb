@@ -1,9 +1,9 @@
 ﻿
 namespace MetodosQuantitativos.Dominio.Entidades
 {
-    public abstract class Fracao<T> where T: struct 
+    public class Fracao<T> where T: struct 
     {
-        protected Fracao(T numerador, T denominador)
+        public Fracao(T numerador, T denominador)
         {
             Numerador = numerador;
             Denominador = denominador;
@@ -15,6 +15,25 @@ namespace MetodosQuantitativos.Dominio.Entidades
         public override string ToString()
         {
             return string.Format("{0}/{1}", Numerador, Denominador);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var fracaoObj = obj as Fracao<T>;
+            return fracaoObj != null && Equals(fracaoObj);
+        }
+
+        protected bool Equals(Fracao<T> other)
+        {
+            return Numerador.Equals(other.Numerador) && Denominador.Equals(other.Denominador);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Numerador.GetHashCode() * 397) ^ Denominador.GetHashCode();
+            }
         }
     }
 }
