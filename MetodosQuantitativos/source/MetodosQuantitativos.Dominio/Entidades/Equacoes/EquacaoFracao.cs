@@ -15,6 +15,11 @@ namespace MetodosQuantitativos.Dominio.Entidades.Equacoes
             Elementos.Add(elemento);
         }
 
+        public void AdicionarElemento(Fracao<T> coeficiente, int expoente)
+        {
+            Elementos.Add(new ElementoEquacaoFracao<T>(coeficiente, expoente));
+        }
+
         public IList<ElementoEquacaoFracao<T>> Elementos { get; private set; }
 
         public override string ToString()
