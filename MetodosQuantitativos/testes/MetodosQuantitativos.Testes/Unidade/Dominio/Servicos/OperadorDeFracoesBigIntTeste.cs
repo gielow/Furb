@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Data.SqlTypes;
+using System.Numerics;
 using FluentAssertions;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 using MetodosQuantitativos.Dominio.Servicos;
@@ -122,6 +123,16 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             var resultado = operadorDeFracoes.Raiz(fracao, raiz);
             resultado.Numerador.Should().Be(BigInteger.Parse(numeradorResultado));
             resultado.Denominador.Should().Be(BigInteger.Parse(denominadorResultado));
+        }
+
+        [TestCase("5", "2", "3", "1", "11", "4")]
+        public void media_de_duas_fracoes(string numerador1, string denominador1, string numerador2, string denominador2, string numeradorResultado, string denominadorResultado)
+        {
+            var fracao1 = new FracaoBigInteger(BigInteger.Parse(numerador1), BigInteger.Parse(denominador1));
+            var fracao2 = new FracaoBigInteger(BigInteger.Parse(numerador2), BigInteger.Parse(denominador2));
+
+            var resultado = operadorDeFracoes.Media(fracao1, fracao2);
+            resultado.Should().Be(new FracaoBigInteger(BigInteger.Parse(numeradorResultado), BigInteger.Parse(denominadorResultado)));
         }
     }
 }

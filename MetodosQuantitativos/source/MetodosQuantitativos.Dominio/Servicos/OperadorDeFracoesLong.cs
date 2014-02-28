@@ -95,5 +95,11 @@ namespace MetodosQuantitativos.Dominio.Servicos
         {
             return new FracaoLong(0);
         }
+
+        public Fracao<long> Media(Fracao<long> fracao1, Fracao<long> fracao2)
+        {
+            var somaDasDuasFracoes = Somar(fracao1, fracao2);
+            return Dividir(somaDasDuasFracoes, new FracaoLong(2, 1));
+        }
     }
 }

@@ -122,5 +122,15 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             resultado.Numerador.Should().Be(numeradorResultado);
             resultado.Denominador.Should().Be(denominadorResultado);
         }
+
+        [TestCase(5, 2, 3, 1, 11, 4)]
+        public void media_de_duas_fracoes(int numerador1, int denominador1, int numerador2, int denominador2, int numeradorResultado, int denominadorResultado)
+        {
+            var fracao1 = new FracaoInt(numerador1, denominador1);
+            var fracao2 = new FracaoInt(numerador2, denominador2);
+
+            var resultado = operadorDeFracoes.Media(fracao1, fracao2);
+            resultado.Should().Be(new FracaoInt(numeradorResultado, denominadorResultado));
+        }
     }
 }

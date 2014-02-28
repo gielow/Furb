@@ -12,5 +12,6 @@ namespace MetodosQuantitativos.Dominio.Servicos
         Fracao<T> Potenciar(Fracao<T> fracao, int potencia);
         Fracao<T> Raiz(Fracao<T> fracao, int raiz);
         Fracao<T> ValorDefault();
+        Fracao<T> Media(Fracao<T> fracao1, Fracao<T> fracao2);
     }
 }
