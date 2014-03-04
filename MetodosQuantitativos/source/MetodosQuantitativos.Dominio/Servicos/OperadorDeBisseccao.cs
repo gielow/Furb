@@ -15,10 +15,16 @@ namespace MetodosQuantitativos.Dominio.Servicos
             this.operadorDeFracoes = operadorDeFracoes;
         }
         
-        public Fracao<T> Calcular(EquacaoFracao<T> equacao, Fracao<T> numeroMenor, Fracao<T> numeroMaior)
+        public Fracao<T> Calcular(EquacaoFracao<T> equacao, Fracao<T> numeroMenor, Fracao<T> numeroMaior, Fracao<T> erroMinimo)
         {
+            var mediaAnterior = operadorDeFracoes.Media(numeroMenor, numeroMaior);
+            
             var media = operadorDeFracoes.Media(numeroMenor, numeroMaior);
-            throw new System.NotImplementedException();
+            var resultadoNumeroMenor = operadorDeEquacoes.Calcular(equacao, numeroMenor);
+            var resultadoNumeroMaior = operadorDeEquacoes.Calcular(equacao, numeroMaior);
+            var resultadoMedia = operadorDeEquacoes.Calcular(equacao, media);
+
+            return null;
         }
     }
 }

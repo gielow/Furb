@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using MetodosQuantitativos.Dominio.Entidades;
 using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 using MetodosQuantitativos.Dominio.Servicos;
@@ -25,7 +26,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             equacao.AdicionarElemento(new FracaoInt(1), 2);
             equacao.AdicionarElemento(new FracaoInt(-8), 0);
 
-            var retorno = operadorDeBisseccao.Calcular(equacao, new FracaoInt(2), new FracaoInt(3));
+            var retorno = operadorDeBisseccao.Calcular(equacao, new FracaoInt(2), new FracaoInt(3), new FracaoInt(1, 100));
             retorno.Should().Be(new FracaoInt(181/64));
         } 
     }

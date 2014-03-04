@@ -97,10 +97,22 @@ namespace MetodosQuantitativos.Dominio.Servicos
             return new FracaoBigInteger(0);
         }
 
+        public Fracao<BigInteger> CriarFracao(BigInteger numerador, BigInteger denominador)
+        {
+            return new Fracao<BigInteger>(numerador, denominador);
+        }
+
         public Fracao<BigInteger> Media(Fracao<BigInteger> fracao1, Fracao<BigInteger> fracao2)
         {
             var somaDasDuasFracoes = Somar(fracao1, fracao2);
             return Dividir(somaDasDuasFracoes, new FracaoBigInteger(2, 1));
+        }
+
+        public int Comparar(Fracao<BigInteger> fracao1, Fracao<BigInteger> fracao2)
+        {
+            var fracao1Comparar = Multiplicar(fracao1, new FracaoBigInteger(fracao2.Denominador, fracao2.Denominador));
+            var fracao2Comparar = Multiplicar(fracao2, new FracaoBigInteger(fracao1.Denominador, fracao1.Denominador));
+            return 0;
         }
     }
 }

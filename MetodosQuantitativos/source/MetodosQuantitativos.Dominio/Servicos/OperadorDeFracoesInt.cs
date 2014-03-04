@@ -64,7 +64,12 @@ namespace MetodosQuantitativos.Dominio.Servicos
 
         public Fracao<int> Multiplicar(Fracao<int> fracao1, Fracao<int> fracao2)
         {
-            return Simplificar(new Fracao<int>(fracao1.Numerador*fracao2.Numerador, fracao1.Denominador*fracao2.Denominador));
+            return Simplificar(MultiplicarSemSimplificar(fracao1, fracao2));
+        }
+
+        public Fracao<int> MultiplicarSemSimplificar(Fracao<int> fracao1, Fracao<int> fracao2)
+        {
+            return new Fracao<int>(fracao1.Numerador * fracao2.Numerador, fracao1.Denominador * fracao2.Denominador);
         }
 
         public Fracao<int> Dividir(Fracao<int> fracao1, Fracao<int> fracao2)
@@ -97,10 +102,26 @@ namespace MetodosQuantitativos.Dominio.Servicos
             return new FracaoInt(0);
         }
 
+        public Fracao<int> CriarFracao(int numerador, int denominador)
+        {
+            return new FracaoInt(numerador, denominador);
+        }
+
         public Fracao<int> Media(Fracao<int> fracao1, Fracao<int> fracao2)
         {
             var somaDasDuasFracoes = Somar(fracao1, fracao2);
             return Dividir(somaDasDuasFracoes, new FracaoInt(2, 1));
+        }
+
+        public int Comparar(Fracao<int> fracao1, Fracao<int> fracao2)
+        {
+            var fracao1Comparar = MultiplicarSemSimplificar(fracao1, new FracaoInt(fracao2.Denominador, fracao2.Denominador));
+            var fracao2Comparar = MultiplicarSemSimplificar(fracao2, new FracaoInt(fracao1.Denominador, fracao1.Denominador));
+            if (fracao1Comparar.Numerador > fracao2Comparar.Numerador)
+                return 1;
+            if (fracao1Comparar.Numerador < fracao2Comparar.Numerador)
+                return -1;
+            return 0;
         }
     }
 }
