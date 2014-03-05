@@ -1,4 +1,5 @@
-﻿using MetodosQuantitativos.Dominio.Entidades;
+﻿using System;
+using MetodosQuantitativos.Dominio.Entidades;
 using System.Numerics;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 
@@ -65,6 +66,11 @@ namespace MetodosQuantitativos.Dominio.Servicos
         public Fracao<BigInteger> Multiplicar(Fracao<BigInteger> fracao1, Fracao<BigInteger> fracao2)
         {
             return Simplificar(new Fracao<BigInteger>(fracao1.Numerador*fracao2.Numerador, fracao1.Denominador*fracao2.Denominador));
+        }
+
+        public Fracao<BigInteger> Multiplicar(Fracao<BigInteger> fracao1, int multiplicador)
+        {
+            throw new NotImplementedException();
         }
 
         public Fracao<BigInteger> Dividir(Fracao<BigInteger> fracao1, Fracao<BigInteger> fracao2)

@@ -8,6 +8,7 @@ namespace MetodosQuantitativos.Dominio.Servicos
         Fracao<T> Somar(Fracao<T> fracao1, Fracao<T> fracao2);
         Fracao<T> Subtrair(Fracao<T> fracao1, Fracao<T> fracao2);
         Fracao<T> Multiplicar(Fracao<T> fracao1, Fracao<T> fracao2);
+        Fracao<T> Multiplicar(Fracao<T> fracao1, int multiplicador);
         Fracao<T> Dividir(Fracao<T> fracao1, Fracao<T> fracao2);
         Fracao<T> Potenciar(Fracao<T> fracao, int potencia);
         Fracao<T> Raiz(Fracao<T> fracao, int raiz);
@@ -15,5 +16,6 @@ namespace MetodosQuantitativos.Dominio.Servicos
         Fracao<T> CriarFracao(T numerador, T denominador);
         Fracao<T> Media(Fracao<T> fracao1, Fracao<T> fracao2);
         int Comparar(Fracao<T> fracao1, Fracao<T> fracao2);
+        
     }
 }

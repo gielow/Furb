@@ -27,7 +27,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             equacao.AdicionarElemento(new FracaoInt(-8), 0);
 
             var retorno = operadorDeBisseccao.Calcular(equacao, new FracaoInt(2), new FracaoInt(3), new FracaoInt(1, 100));
-            retorno.Should().Be(new FracaoInt(181/64));
+            retorno.Should().Be(new FracaoInt(181,64));
         } 
     }
 }

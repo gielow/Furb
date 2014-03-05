@@ -67,6 +67,11 @@ namespace MetodosQuantitativos.Dominio.Servicos
             return Simplificar(MultiplicarSemSimplificar(fracao1, fracao2));
         }
 
+        public Fracao<int> Multiplicar(Fracao<int> fracao1, int multiplicador)
+        {
+            return Multiplicar(fracao1, new FracaoInt(multiplicador));
+        }
+
         public Fracao<int> MultiplicarSemSimplificar(Fracao<int> fracao1, Fracao<int> fracao2)
         {
             return new Fracao<int>(fracao1.Numerador * fracao2.Numerador, fracao1.Denominador * fracao2.Denominador);
