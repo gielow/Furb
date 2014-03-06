@@ -28,6 +28,17 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
 
             var retorno = operadorDeBisseccao.Calcular(equacao, new FracaoInt(2), new FracaoInt(3), new FracaoInt(1, 100));
             retorno.Should().Be(new FracaoInt(181,64));
+        }
+
+        [Test]
+        public void realizando_bisseccao_para_obter_a_fracao_aproximada_para_zerar_uma_equacao2()
+        {
+            var equacao = new EquacaoFracao<int>();
+            equacao.AdicionarElemento(new FracaoInt(1), 2);
+            equacao.AdicionarElemento(new FracaoInt(-6), 0);
+
+            var retorno = operadorDeBisseccao.Calcular(equacao, new FracaoInt(2), new FracaoInt(3), new FracaoInt(1, 100));
+            retorno.Should().Be(new FracaoInt(181, 64));
         } 
     }
 }

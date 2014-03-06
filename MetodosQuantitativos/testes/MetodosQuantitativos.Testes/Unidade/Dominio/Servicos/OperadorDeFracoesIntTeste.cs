@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 using MetodosQuantitativos.Dominio.Servicos;
 using NUnit.Framework;
@@ -112,7 +113,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             resultado.Denominador.Should().Be(denominadorResultado);
         }
 
-        [TestCase(125, 27, 3, 5, 3)]
+        [TestCase(8, 6, 2, 181, 157)]
         [TestCase(9, 4, 2, 3, 2)]
         public void raiz_quadrada_de_fracoes(int numerador, int denominador, int raiz, int numeradorResultado, int denominadorResultado)
         {
