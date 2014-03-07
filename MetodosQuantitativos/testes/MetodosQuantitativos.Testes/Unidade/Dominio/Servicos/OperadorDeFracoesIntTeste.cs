@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 using MetodosQuantitativos.Dominio.Servicos;
 using NUnit.Framework;
@@ -144,5 +145,48 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             var resultado = operadorDeFracoes.Comparar(fracao1, fracao2);
             resultado.Should().Be(resultadoEsperado);
         }
+
+        [Test]
+        public void realizando_bisseccao_para_obter_a_fracao_aproximada_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracao<int>();
+            equacao.AdicionarElemento(new FracaoInt(1), 2);
+            equacao.AdicionarElemento(new FracaoInt(-8), 0);
+
+            //new FracaoInt(2), new FracaoInt(3)
+            var retorno = operadorDeFracoes.Bisseccao(equacao, new FracaoInt(1, 100));
+            retorno.Should().Be(new FracaoInt(181, 64));
+        }
+
+        [Test]
+        public void buscando_menor_numero_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracao<int>();
+            equacao.AdicionarElemento(new FracaoInt(1), 2);
+            equacao.AdicionarElemento(new FracaoInt(-8), 0);
+
+            var retorno = operadorDeFracoes.BuscarMenorNumeroParaZerarEquacao(equacao);
+            retorno.Should().Be(new FracaoInt(2));
+        }
+
+        [Test]
+        public void buscando_maior_numero_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracao<int>();
+            equacao.AdicionarElemento(new FracaoInt(1), 2);
+            equacao.AdicionarElemento(new FracaoInt(-8), 0);
+
+            var retorno = operadorDeFracoes.BuscarMaiorNumeroParaZerarEquacao(equacao);
+            retorno.Should().Be(new FracaoInt(3));
+        }
+
+        [Test]
+        public void calculando_uma_equacao_de_numeros_inteiros_positivos()
+        {
+            var equacao = new EquacaoFracao<int>();
+            equacao.AdicionarElemento(new ElementoEquacaoFracao<int>(new FracaoInt(1), 2));
+            equacao.AdicionarElemento(new ElementoEquacaoFracao<int>(new FracaoInt(-8), 0));
+            operadorDeFracoes.CalcularEquacao(equacao, new FracaoInt(11, 4)).Should().Be(new FracaoInt(-7, 16));
+        } 
     }
 }

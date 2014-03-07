@@ -1,5 +1,6 @@
 ﻿using MetodosQuantitativos.Dominio.Entidades;
 using System;
+using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 
 namespace MetodosQuantitativos.Dominio.Servicos
@@ -127,6 +128,78 @@ namespace MetodosQuantitativos.Dominio.Servicos
             if (fracao1Comparar.Numerador < fracao2Comparar.Numerador)
                 return -1;
             return 0;
+        }
+
+        public Fracao<int> CalcularEquacao(EquacaoFracao<int> equacao, Fracao<int> valorDeX)
+        {
+            Fracao<int> resultado = new FracaoInt(0);
+            foreach (var elementoEquacao in equacao.Elementos)
+            {
+                var resultP = Potenciar(valorDeX, elementoEquacao.Expoente);
+                var resultM = Multiplicar(elementoEquacao.Coeficiente, resultP);
+                resultado = Somar(resultado, resultM);
+            }
+            return resultado;
+        }
+
+        public Fracao<int> BuscarMenorNumeroParaZerarEquacao(EquacaoFracao<int> equacao)
+        {
+            var fracaoZero = new FracaoInt(0);
+            var numeroTesteAnterior = 1;
+            var resultadoTesteAnterior = CalcularEquacao(equacao, new FracaoInt(numeroTesteAnterior));
+            var numeroTesteAtual = 2;
+            var resultadoTesteAtual = CalcularEquacao(equacao, new FracaoInt(numeroTesteAtual));
+
+            var mudouSinal = false;
+            while (!mudouSinal)
+            {
+                if (Comparar(resultadoTesteAtual, resultadoTesteAnterior) == 1)
+                {
+                    numeroTesteAnterior = numeroTesteAtual;
+                    numeroTesteAtual++;
+                }
+            }
+            return new FracaoInt(0);
+        }
+
+        public object BuscarMaiorNumeroParaZerarEquacao(EquacaoFracao<int> equacao)
+        {
+            return new FracaoInt(0);
+        }
+
+        public Fracao<int> Bisseccao(EquacaoFracao<int> equacao, Fracao<int> erroMinimo)
+        {
+            Fracao<int> fracaoZero = new FracaoInt(0);
+            Fracao<int> numeroMenor = new FracaoInt(0);
+            Fracao<int> numeroMaior = new FracaoInt(0);
+            var mediaAnterior = Media(numeroMenor, numeroMaior);
+
+            var media = Media(numeroMenor, numeroMaior);
+            var resultadoNumeroMenor = CalcularEquacao(equacao, numeroMenor);
+            var resultadoNumeroMaior = CalcularEquacao(equacao, numeroMaior);
+            var resultadoMedia = CalcularEquacao(equacao, media);
+
+            Fracao<int> erro;
+            do
+            {
+                if (Comparar(resultadoMedia, resultadoNumeroMenor) == 1 && Comparar(resultadoMedia, fracaoZero) == -1)
+                    numeroMenor = media;
+                if (Comparar(resultadoMedia, resultadoNumeroMaior) == -1 && Comparar(resultadoMedia, fracaoZero) == 1)
+                    numeroMaior = media;
+
+                media = Media(numeroMenor, numeroMaior);
+                resultadoNumeroMenor = CalcularEquacao(equacao, numeroMenor);
+                resultadoNumeroMaior = CalcularEquacao(equacao, numeroMaior);
+                resultadoMedia = CalcularEquacao(equacao, media);
+
+                erro = Dividir(Subtrair(media, mediaAnterior), mediaAnterior);
+                if (Comparar(erro, fracaoZero) == -1)
+                    erro = Multiplicar(erro, -1);
+                mediaAnterior = media;
+
+            } while (Comparar(erro, erroMinimo) == 1);
+
+            return media;
         }
     }
 }
