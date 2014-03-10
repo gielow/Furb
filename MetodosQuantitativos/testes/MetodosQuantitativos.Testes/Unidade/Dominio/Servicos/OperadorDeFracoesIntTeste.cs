@@ -166,7 +166,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             equacao.AdicionarElemento(new FracaoInt(-8), 0);
 
             var retorno = operadorDeFracoes.BuscarMenorNumeroParaZerarEquacao(equacao);
-            retorno.Should().Be(new FracaoInt(2));
+            retorno.Should().Be(2);
         }
 
         [Test]

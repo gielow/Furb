@@ -1,4 +1,5 @@
-﻿using MetodosQuantitativos.Dominio.Entidades;
+﻿using System.Numerics;
+using MetodosQuantitativos.Dominio.Entidades;
 using System;
 using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
@@ -142,24 +143,78 @@ namespace MetodosQuantitativos.Dominio.Servicos
             return resultado;
         }
 
-        public Fracao<int> BuscarMenorNumeroParaZerarEquacao(EquacaoFracao<int> equacao)
+        public int BuscarMenorNumeroParaZerarEquacao(EquacaoFracao<int> equacao)
         {
             var fracaoZero = new FracaoInt(0);
-            var numeroTesteAnterior = 1;
-            var resultadoTesteAnterior = CalcularEquacao(equacao, new FracaoInt(numeroTesteAnterior));
-            var numeroTesteAtual = 2;
-            var resultadoTesteAtual = CalcularEquacao(equacao, new FracaoInt(numeroTesteAtual));
+            var numeroTestado = 0;
+            var resultado = CalcularEquacao(equacao, new FracaoInt(numeroTestado));
+            var ultimoNumeroTestado = numeroTestado;
+            var ultimoResultado = resultado;
+            
 
-            var mudouSinal = false;
-            while (!mudouSinal)
+            while ((Comparar(ultimoResultado, fracaoZero) == -1 && Comparar(resultado, fracaoZero) == -1) ||
+                   (Comparar(ultimoResultado, fracaoZero) == 1 && Comparar(resultado, fracaoZero) == 1))
             {
-                if (Comparar(resultadoTesteAtual, resultadoTesteAnterior) == 1)
+                ultimoNumeroTestado = numeroTestado;
+                ultimoResultado = resultado;
+
+                if (Comparar(resultado, fracaoZero) == 0)
                 {
-                    numeroTesteAnterior = numeroTesteAtual;
-                    numeroTesteAtual++;
+                    return numeroTestado;
                 }
+                if (Comparar(resultado, fracaoZero) == 1)
+                {
+                    numeroTestado--;
+                }
+                else if (Comparar(resultado, fracaoZero) == -1)
+                {
+                    numeroTestado++;
+                }
+                resultado = CalcularEquacao(equacao, new FracaoInt(numeroTestado));
             }
-            return new FracaoInt(0);
+            return ultimoNumeroTestado;
+        }
+
+        public int BuscarMenorNumeroParaZerarEquacao(EquacaoFracao<int> equacao, EntradaBisseccaoDTO entradaBisseccao)
+        {
+            //var zero = new FracaoInt(0);
+            //var media = Media(entradaBisseccao.ValorMinimo, entradaBisseccao.ValorMaximo);
+            var resultadoMin = CalcularEquacao(equacao, entradaBisseccao.ValorMinimo);
+            var resultadoMax = CalcularEquacao(equacao, entradaBisseccao.ValorMaximo);
+            //var resultadoMed = CalcularEquacao(equacao, media);
+            var diferencaMin = resultadoMin.Numerador;
+            if (diferencaMin < 0)
+                diferencaMin *= -1;
+
+            var diferencaMax = resultadoMax.Numerador;
+            if (diferencaMax < 0)
+                diferencaMax *= -1;
+
+            var media = (entradaBisseccao.ValorMinimo.Numerador + entradaBisseccao.ValorMaximo.Numerador) / 2;
+            if (diferencaMax < diferencaMin)
+            {
+                var newEntradaBisseccao = new EntradaBisseccaoDTO(entradaBisseccao.ValorMaximo, new FracaoInt(media));
+                return BuscarMenorNumeroParaZerarEquacao(equacao, newEntradaBisseccao);
+            }
+            else
+            {
+                var newEntradaBisseccao = new EntradaBisseccaoDTO(entradaBisseccao.ValorMinimo, new FracaoInt(media));
+                return BuscarMenorNumeroParaZerarEquacao(equacao, newEntradaBisseccao);
+                
+            }
+
+        }
+
+        public class EntradaBisseccaoDTO
+        {
+            public EntradaBisseccaoDTO(Fracao<int> valorMinimo, Fracao<int> valorMaximo)
+            {
+                ValorMinimo = valorMinimo;
+                ValorMaximo = valorMaximo;
+            }
+
+            public Fracao<int> ValorMinimo { get; set; }
+            public Fracao<int> ValorMaximo { get; set; } 
         }
 
         public object BuscarMaiorNumeroParaZerarEquacao(EquacaoFracao<int> equacao)
