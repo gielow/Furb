@@ -170,6 +170,17 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
         }
 
         [Test]
+        public void buscando_menor_numero_para_zerar_uma_equacao2()
+        {
+            var equacao = new EquacaoFracao<int>();
+            equacao.AdicionarElemento(new FracaoInt(1), 3);
+            equacao.AdicionarElemento(new FracaoInt(10), 0);
+
+            var retorno = operadorDeFracoes.BuscarMenorNumeroParaZerarEquacao(equacao);
+            retorno.Should().Be(-3);
+        }
+
+        [Test]
         public void buscando_maior_numero_para_zerar_uma_equacao()
         {
             var equacao = new EquacaoFracao<int>();
@@ -177,7 +188,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             equacao.AdicionarElemento(new FracaoInt(-8), 0);
 
             var retorno = operadorDeFracoes.BuscarMaiorNumeroParaZerarEquacao(equacao);
-            retorno.Should().Be(new FracaoInt(3));
+            retorno.Should().Be(3);
         }
 
         [Test]

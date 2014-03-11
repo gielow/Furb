@@ -172,39 +172,41 @@ namespace MetodosQuantitativos.Dominio.Servicos
                 }
                 resultado = CalcularEquacao(equacao, new FracaoInt(numeroTestado));
             }
-            return ultimoNumeroTestado;
+            return Comparar(ultimoResultado, fracaoZero) == 1 ? numeroTestado : ultimoNumeroTestado;
         }
 
-        public int BuscarMenorNumeroParaZerarEquacao(EquacaoFracao<int> equacao, EntradaBisseccaoDTO entradaBisseccao)
+        public int BuscarMaiorNumeroParaZerarEquacao(EquacaoFracao<int> equacao)
         {
-            //var zero = new FracaoInt(0);
-            //var media = Media(entradaBisseccao.ValorMinimo, entradaBisseccao.ValorMaximo);
-            var resultadoMin = CalcularEquacao(equacao, entradaBisseccao.ValorMinimo);
-            var resultadoMax = CalcularEquacao(equacao, entradaBisseccao.ValorMaximo);
-            //var resultadoMed = CalcularEquacao(equacao, media);
-            var diferencaMin = resultadoMin.Numerador;
-            if (diferencaMin < 0)
-                diferencaMin *= -1;
+            var fracaoZero = new FracaoInt(0);
+            var numeroTestado = 0;
+            var resultado = CalcularEquacao(equacao, new FracaoInt(numeroTestado));
+            var ultimoNumeroTestado = numeroTestado;
+            var ultimoResultado = resultado;
 
-            var diferencaMax = resultadoMax.Numerador;
-            if (diferencaMax < 0)
-                diferencaMax *= -1;
 
-            var media = (entradaBisseccao.ValorMinimo.Numerador + entradaBisseccao.ValorMaximo.Numerador) / 2;
-            if (diferencaMax < diferencaMin)
+            while ((Comparar(ultimoResultado, fracaoZero) == -1 && Comparar(resultado, fracaoZero) == -1) ||
+                   (Comparar(ultimoResultado, fracaoZero) == 1 && Comparar(resultado, fracaoZero) == 1))
             {
-                var newEntradaBisseccao = new EntradaBisseccaoDTO(entradaBisseccao.ValorMaximo, new FracaoInt(media));
-                return BuscarMenorNumeroParaZerarEquacao(equacao, newEntradaBisseccao);
-            }
-            else
-            {
-                var newEntradaBisseccao = new EntradaBisseccaoDTO(entradaBisseccao.ValorMinimo, new FracaoInt(media));
-                return BuscarMenorNumeroParaZerarEquacao(equacao, newEntradaBisseccao);
-                
-            }
+                ultimoNumeroTestado = numeroTestado;
+                ultimoResultado = resultado;
 
+                if (Comparar(resultado, fracaoZero) == 0)
+                {
+                    return numeroTestado;
+                }
+                if (Comparar(resultado, fracaoZero) == 1)
+                {
+                    numeroTestado--;
+                }
+                else if (Comparar(resultado, fracaoZero) == -1)
+                {
+                    numeroTestado++;
+                }
+                resultado = CalcularEquacao(equacao, new FracaoInt(numeroTestado));
+            }
+            return Comparar(ultimoResultado, fracaoZero) == -1 ? numeroTestado : ultimoNumeroTestado;
         }
-
+        
         public class EntradaBisseccaoDTO
         {
             public EntradaBisseccaoDTO(Fracao<int> valorMinimo, Fracao<int> valorMaximo)
@@ -215,11 +217,6 @@ namespace MetodosQuantitativos.Dominio.Servicos
 
             public Fracao<int> ValorMinimo { get; set; }
             public Fracao<int> ValorMaximo { get; set; } 
-        }
-
-        public object BuscarMaiorNumeroParaZerarEquacao(EquacaoFracao<int> equacao)
-        {
-            return new FracaoInt(0);
         }
 
         public Fracao<int> Bisseccao(EquacaoFracao<int> equacao, Fracao<int> erroMinimo)
