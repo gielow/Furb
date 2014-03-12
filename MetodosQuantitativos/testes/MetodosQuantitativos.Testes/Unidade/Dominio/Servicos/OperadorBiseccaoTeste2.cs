@@ -10,14 +10,12 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
 {
     public class OperadorDeBisseccaoTeste2
     {
-        private OperadorDeBisseccao<int> operadorDeBisseccao;
+        private OperadorDeFracoesInt operadorDeFracoes;
 
         [SetUp]
         public void InicializarTeste()
         {
-            var operadorDeFracoesInt = new OperadorDeFracoesInt();
-            var operadorDeEquacoesComFracao = new OperadorDeEquacoesComFracao<int>(operadorDeFracoesInt);
-            operadorDeBisseccao = new OperadorDeBisseccao<int>(operadorDeEquacoesComFracao, operadorDeFracoesInt);
+            operadorDeFracoes = new OperadorDeFracoesInt();
         }
 
         [Test]
@@ -80,14 +78,12 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
         public Fracao<int> Calcular(EquacaoFracao<int> equacao, Fracao<int> numeroMenor, Fracao<int> numeroMaior, Fracao<int> erroMinimo)
         {
             var fracaoZero = new FracaoInt(0);
-            var operadorDeFracoes = new OperadorDeFracoesInt();
-            var operadorDeEquacoes = new OperadorDeEquacoesComFracao<int>(operadorDeFracoes);
             var mediaAnterior = operadorDeFracoes.Media(numeroMenor, numeroMaior);
 
             var media = operadorDeFracoes.Media(numeroMenor, numeroMaior);
-            var resultadoNumeroMenor = operadorDeEquacoes.Calcular(equacao, numeroMenor);
-            var resultadoNumeroMaior = operadorDeEquacoes.Calcular(equacao, numeroMaior);
-            var resultadoMedia = operadorDeEquacoes.Calcular(equacao, media);
+            var resultadoNumeroMenor = operadorDeFracoes.CalcularEquacao(equacao, numeroMenor);
+            var resultadoNumeroMaior = operadorDeFracoes.CalcularEquacao(equacao, numeroMaior);
+            var resultadoMedia = operadorDeFracoes.CalcularEquacao(equacao, media);
             var erro = operadorDeFracoes.Dividir(operadorDeFracoes.Subtrair(mediaAnterior, media), mediaAnterior);
 
             ImprimirLinhaBiseccao("x1", "xm", "x2", "f(x1)", "f(xm)", "f(x2)", "ERRO");
@@ -104,10 +100,10 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
                     numeroMaior = media;
 
                 media = operadorDeFracoes.Media(numeroMenor, numeroMaior);
-                resultadoNumeroMenor = operadorDeEquacoes.Calcular(equacao, numeroMenor);
-                resultadoNumeroMaior = operadorDeEquacoes.Calcular(equacao, numeroMaior);
-                resultadoMedia = operadorDeEquacoes.Calcular(equacao, media);
-                erro = erro = operadorDeFracoes.Dividir(operadorDeFracoes.Subtrair(mediaAnterior, media), mediaAnterior);
+                resultadoNumeroMenor = operadorDeFracoes.CalcularEquacao(equacao, numeroMenor);
+                resultadoNumeroMaior = operadorDeFracoes.CalcularEquacao(equacao, numeroMaior);
+                resultadoMedia = operadorDeFracoes.CalcularEquacao(equacao, media);
+                erro = operadorDeFracoes.Dividir(operadorDeFracoes.Subtrair(mediaAnterior, media), mediaAnterior);
                 erro = operadorDeFracoes.Comparar(erro, fracaoZero) == -1? operadorDeFracoes.Multiplicar(erro, new FracaoInt(-1)) : erro;
 
                 mediaAnterior = media;

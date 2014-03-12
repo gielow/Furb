@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
 {
-    public class BUscadorIntervaloBiseccaoTeste
+    public class BuscadorIntervaloBiseccaoTeste
     {
         private OperadorDeEquacoes operadorDeEquacoes;
 
@@ -45,24 +45,29 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
         private IntervalorBiseccao ObterValores(Equacao equacao)
         {
             IntervalorBiseccao intervaloEncontrado = null;
-            var valorInicial = -10;
-            var valorFinal = 10;
-
-            var numeroAnterior = valorInicial;
-            var resultadoAnterior = operadorDeEquacoes.Calcular(equacao, valorInicial);
-
-            Console.WriteLine("x | f(x)");
-            for (var numeroAtual = valorInicial; numeroAtual <= valorFinal; numeroAtual++)
+            const int numeroMaximoIteracoes = 100;
+            for (int iteracao = 1; iteracao <= numeroMaximoIteracoes && intervaloEncontrado == null; iteracao++)
             {
-                var resultadoAtual = operadorDeEquacoes.Calcular(equacao, numeroAtual);
-                if (intervaloEncontrado == null && ((resultadoAnterior < 0 && resultadoAtual > 0) || (resultadoAnterior > 0 && resultadoAtual < 0)))
+                var valorInicial = -10 * iteracao;
+                var valorFinal = 10 * iteracao;
+
+                var numeroAnterior = valorInicial;
+                var resultadoAnterior = operadorDeEquacoes.Calcular(equacao, valorInicial);
+
+                Console.WriteLine("x | f(x)");
+                for (var numeroAtual = valorInicial; numeroAtual <= valorFinal; numeroAtual++)
                 {
-                    intervaloEncontrado = new IntervalorBiseccao { Menor = numeroAnterior, Maior = numeroAtual };
+                    var resultadoAtual = operadorDeEquacoes.Calcular(equacao, numeroAtual);
+                    if (intervaloEncontrado == null && ((resultadoAnterior < 0 && resultadoAtual > 0) || (resultadoAnterior > 0 && resultadoAtual < 0)))
+                    {
+                        intervaloEncontrado = new IntervalorBiseccao { Menor = numeroAnterior, Maior = numeroAtual };
+                    }
+                    numeroAnterior = numeroAtual;
+                    resultadoAnterior = resultadoAtual;
+                    Console.WriteLine("{0} | {1}", numeroAtual, resultadoAtual);
                 }
-                numeroAnterior = numeroAtual;
-                resultadoAnterior = resultadoAtual;
-                Console.WriteLine("{0} | {1}", numeroAtual, resultadoAtual);
             }
+            
 
             Console.WriteLine();
             Console.WriteLine("Primeiro intervalo encontrado: {0}", intervaloEncontrado);
