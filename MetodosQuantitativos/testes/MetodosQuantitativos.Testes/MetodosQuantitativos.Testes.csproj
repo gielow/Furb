@@ -51,6 +51,14 @@
     <Compile Include="Unidade\Dominio\Entidades\ElementoEquacaoTeste.cs" />
     <Compile Include="Unidade\Dominio\Entidades\EquacaoTeste.cs" />
     <Compile Include="Unidade\Dominio\Entidades\FracaoTeste.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Unidade\Dominio\Servicos\BUscadorIntervaloBiseccaoTeste.cs" />
+    <Compile Include="Unidade\Dominio\Servicos\OperadorBiseccaoTeste2.cs" />
+    <Compile Include="Unidade\Dominio\Servicos\OperadorDeBisseccaoTeste.cs" />
+    <Compile Include="Unidade\Dominio\Servicos\OperadorDeEquacoesComFracaoTeste.cs" />
+    <Compile Include="Unidade\Dominio\Servicos\OperadorDeEquacoesTeste.cs" />
+>>>>>>> MQ:Implementando missecao com double
     <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesBigIntTeste.cs" />
     <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesLongTeste.cs" />
     <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesIntTeste.cs" />
