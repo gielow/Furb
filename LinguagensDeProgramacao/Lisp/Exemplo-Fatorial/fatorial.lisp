@@ -1,0 +1,6 @@
+(defun fatorial (n) (if (<= n 1) 1 (* n (fatorial (- n 1)))))
+(princ "Digite um valor para o fatorial: ")
+(setq result (fatorial (read)))
+(princ "Resultado: ")
+(princ result)
+(read-line)
