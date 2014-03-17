@@ -54,7 +54,6 @@
     <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesBigIntTeste.cs" />
     <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesLongTeste.cs" />
     <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesIntTeste.cs" />
-    <Compile Include="Unidade\Dominio\Servicos\RaizFracaoTeste.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\source\MetodosQuantitativos.Dominio\MetodosQuantitativos.Dominio.csproj">
