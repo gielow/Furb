@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using MetodosQuantitativos.Dominio.Entidades;
+using MetodosQuantitativos.Dominio.Entidades.Equacoes;
+using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 using MetodosQuantitativos.Dominio.Servicos;
 using NUnit.Framework;
 
@@ -111,6 +113,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             resultado.Denominador.Should().Be(denominadorResultado);
         }
 
+        [TestCase(8, 6, 2, 181, 157)]
         [TestCase(125, 27, 3, 5, 3)]
         [TestCase(9, 4, 2, 3, 2)]
         public void raiz_quadrada_de_fracoes(long numerador, long denominador, int raiz, long numeradorResultado, long denominadorResultado)
@@ -118,8 +121,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             var fracao = new FracaoLong(numerador, denominador);
 
             var resultado = operadorDeFracoes.Raiz(fracao, raiz);
-            resultado.Numerador.Should().Be(numeradorResultado);
-            resultado.Denominador.Should().Be(denominadorResultado);
+            resultado.Should().Be(new FracaoLong(numeradorResultado, denominadorResultado));
         }
 
         [TestCase(5, 2, 3, 1, 11, 4)]
@@ -131,5 +133,58 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             var resultado = operadorDeFracoes.Media(fracao1, fracao2);
             resultado.Should().Be(new FracaoLong(numeradorResultado, denominadorResultado));
         }
+        
+        [Test]
+        public void realizando_bisseccao_para_obter_a_fracao_aproximada_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracaoLong();
+            equacao.AdicionarElemento(new FracaoLong(1), 2);
+            equacao.AdicionarElemento(new FracaoLong(-8), 0);
+
+            var retorno = operadorDeFracoes.Bisseccao(equacao, new FracaoLong(1, 100));
+            retorno.Should().Be(new FracaoLong(181, 64));
+        }
+
+        [Test]
+        public void buscando_menor_numero_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracaoLong();
+            equacao.AdicionarElemento(new FracaoLong(1), 2);
+            equacao.AdicionarElemento(new FracaoLong(-8), 0);
+
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Menor.Numerador.Should().Be(2);
+        }
+
+        [Test]
+        public void buscando_menor_numero_para_zerar_uma_equacao2()
+        {
+            var equacao = new EquacaoFracaoLong();
+            equacao.AdicionarElemento(new FracaoLong(1), 3);
+            equacao.AdicionarElemento(new FracaoLong(10), 0);
+
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Menor.Numerador.Should().Be(-3);
+        }
+
+        [Test]
+        public void buscando_maior_numero_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracaoLong();
+            equacao.AdicionarElemento(new FracaoLong(1), 2);
+            equacao.AdicionarElemento(new FracaoLong(-8), 0);
+
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Maior.Numerador.Should().Be(3);
+        }
+
+        [Test]
+        public void calculando_uma_equacao_de_numeros_inteiros_positivos()
+        {
+            var equacao = new EquacaoFracaoLong();
+            equacao.AdicionarElemento(new FracaoLong(1), 2);
+            equacao.AdicionarElemento(new FracaoLong(-8), 0);
+            operadorDeFracoes.CalcularEquacao(equacao, new FracaoLong(11, 4)).Should().Be(new FracaoLong(-7, 16));
+        } 
     }
 }

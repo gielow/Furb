@@ -1,5 +1,4 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 using MetodosQuantitativos.Dominio.Servicos;
@@ -20,7 +19,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
         [TestCase(1000, 500, 2,1)]
         [TestCase(-1000, 500, -2,1)]
         [TestCase(150860, 9975, 1588, 105)]
-        [TestCase(-150860, -9975, -1588, -105)]
+        [TestCase(-150860, -9975, 1588, 105)]
         public void simplificando_uma_fracao_inteira(int numerador, int denominador, int numeradorEsperado, int denominadorEsperado)
         {
             var fracao = new FracaoInt(numerador, denominador);
@@ -28,7 +27,6 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             var resultado = operadorDeFracoes.Simplificar(fracao);
             resultado.Numerador.Should().Be(numeradorEsperado);
             resultado.Denominador.Should().Be(denominadorEsperado);
-
         }
 
         [TestCase(10, 15, 5, 5, 1)]
@@ -121,8 +119,7 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             var fracao = new FracaoInt(numerador, denominador);
 
             var resultado = operadorDeFracoes.Raiz(fracao, raiz);
-            resultado.Numerador.Should().Be(numeradorResultado);
-            resultado.Denominador.Should().Be(denominadorResultado);
+            resultado.Should().Be(new FracaoInt(numeradorResultado, denominadorResultado));
         }
 
         [TestCase(5, 2, 3, 1, 11, 4)]
@@ -153,7 +150,6 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             equacao.AdicionarElemento(new FracaoInt(1), 2);
             equacao.AdicionarElemento(new FracaoInt(-8), 0);
 
-            //new FracaoInt(2), new FracaoInt(3)
             var retorno = operadorDeFracoes.Bisseccao(equacao, new FracaoInt(1, 100));
             retorno.Should().Be(new FracaoInt(181, 64));
         }
@@ -165,8 +161,8 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             equacao.AdicionarElemento(new FracaoInt(1), 2);
             equacao.AdicionarElemento(new FracaoInt(-8), 0);
 
-            var retorno = operadorDeFracoes.BuscarMenorNumeroParaZerarEquacao(equacao);
-            retorno.Should().Be(2);
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Menor.Numerador.Should().Be(2);
         }
 
         [Test]
@@ -176,8 +172,8 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             equacao.AdicionarElemento(new FracaoInt(1), 3);
             equacao.AdicionarElemento(new FracaoInt(10), 0);
 
-            var retorno = operadorDeFracoes.BuscarMenorNumeroParaZerarEquacao(equacao);
-            retorno.Should().Be(-3);
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Menor.Numerador.Should().Be(-3);
         }
 
         [Test]
@@ -187,8 +183,8 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             equacao.AdicionarElemento(new FracaoInt(1), 2);
             equacao.AdicionarElemento(new FracaoInt(-8), 0);
 
-            var retorno = operadorDeFracoes.BuscarMaiorNumeroParaZerarEquacao(equacao);
-            retorno.Should().Be(3);
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Maior.Numerador.Should().Be(3);
         }
 
         [Test]

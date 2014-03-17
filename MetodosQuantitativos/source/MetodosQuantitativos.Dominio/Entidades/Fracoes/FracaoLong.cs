@@ -1,5 +1,5 @@
 ﻿
-namespace MetodosQuantitativos.Dominio.Entidades
+namespace MetodosQuantitativos.Dominio.Entidades.Fracoes
 {
     public class FracaoLong :Fracao<long>
     {
