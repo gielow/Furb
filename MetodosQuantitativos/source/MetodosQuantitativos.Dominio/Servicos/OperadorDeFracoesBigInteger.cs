@@ -1,7 +1,10 @@
 ﻿using System;
 using MetodosQuantitativos.Dominio.Entidades;
 using System.Numerics;
+using MetodosQuantitativos.Dominio.Entidades.Biseccao;
+using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
+using MetodosQuantitativos.Dominio.Extencoes;
 
 namespace MetodosQuantitativos.Dominio.Servicos
 {
@@ -94,8 +97,17 @@ namespace MetodosQuantitativos.Dominio.Servicos
 
         public Fracao<BigInteger> Raiz(Fracao<BigInteger> fracao, int raiz)
         {
-            var fracaoPotencia = Potenciar(fracao, raiz);
-            return Simplificar(new Fracao<BigInteger>(fracaoPotencia.Denominador, fracaoPotencia.Numerador));
+            var equacaoBiseccaoNumerador = new EquacaoFracaoBigInteger();
+            equacaoBiseccaoNumerador.AdicionarElemento(new FracaoBigInteger(1), raiz);
+            equacaoBiseccaoNumerador.AdicionarElemento(new FracaoBigInteger(fracao.Numerador * -1), 0);
+            var resultadoBiseccaoNumerador = Bisseccao(equacaoBiseccaoNumerador);
+
+            var equacaoBiseccaoDenominador = new EquacaoFracaoBigInteger();
+            equacaoBiseccaoDenominador.AdicionarElemento(new FracaoBigInteger(1), raiz);
+            equacaoBiseccaoDenominador.AdicionarElemento(new FracaoBigInteger(fracao.Denominador * -1), 0);
+            var resultadoBiseccaoDenominador = Bisseccao(equacaoBiseccaoDenominador);
+
+            return Dividir(resultadoBiseccaoNumerador, resultadoBiseccaoDenominador);
         }
 
         public Fracao<BigInteger> ValorDefault()
@@ -114,11 +126,148 @@ namespace MetodosQuantitativos.Dominio.Servicos
             return Dividir(somaDasDuasFracoes, new FracaoBigInteger(2, 1));
         }
 
-        public int Comparar(Fracao<BigInteger> fracao1, Fracao<BigInteger> fracao2)
+        public Fracao<BigInteger> CalcularEquacao(EquacaoFracaoBigInteger equacao, Fracao<BigInteger> valorDeX)
         {
-            var fracao1Comparar = Multiplicar(fracao1, new FracaoBigInteger(fracao2.Denominador, fracao2.Denominador));
-            var fracao2Comparar = Multiplicar(fracao2, new FracaoBigInteger(fracao1.Denominador, fracao1.Denominador));
-            return 0;
+            Fracao<BigInteger> resultado = new FracaoBigInteger(0);
+            foreach (var elementoEquacao in equacao.Elementos)
+            {
+                var resultP = Potenciar(valorDeX, elementoEquacao.Expoente);
+                var resultM = Multiplicar(elementoEquacao.Coeficiente, resultP);
+                resultado = Somar(resultado, resultM);
+            }
+            return resultado;
+        }
+
+        public Fracao<BigInteger> Bisseccao(EquacaoFracaoBigInteger equacao)
+        {
+            return Bisseccao(equacao, new FracaoBigInteger(1, 100));
+        }
+
+        public Fracao<BigInteger> Bisseccao(EquacaoFracaoBigInteger equacao, Fracao<BigInteger> erroMinimo)
+        {
+            var valoresEntradaBiseccao = ObterValoresBiseccao(equacao);
+            return Bisseccao(equacao, erroMinimo, valoresEntradaBiseccao);
+        }
+
+        public Fracao<BigInteger> Bisseccao(EquacaoFracaoBigInteger equacao, Fracao<BigInteger> erroMinimo, IntervaloBiseccao<Fracao<BigInteger>> valoresEntradaBiseccao)
+        {
+            var fracaoZero = new FracaoBigInteger(0);
+
+            if (valoresEntradaBiseccao.ResultadoMenor.Igual(fracaoZero))
+            {
+                Console.WriteLine("Resultado da Bisecção: " + valoresEntradaBiseccao.Menor);
+                return valoresEntradaBiseccao.Menor;
+            }
+            if (valoresEntradaBiseccao.ResultadoMaior.Igual(fracaoZero))
+            {
+                Console.WriteLine("Resultado da Bisecção: " + valoresEntradaBiseccao.Maior);
+                return valoresEntradaBiseccao.Maior;
+            }
+
+            var numeroMenor = valoresEntradaBiseccao.Menor;
+            var numeroMaior = valoresEntradaBiseccao.Maior;
+            var mediaAnterior = Media(numeroMenor, numeroMaior);
+
+            var media = Media(numeroMenor, numeroMaior);
+            var resultadoNumeroMenor = CalcularEquacao(equacao, numeroMenor);
+            var resultadoNumeroMaior = CalcularEquacao(equacao, numeroMaior);
+            var resultadoMedia = CalcularEquacao(equacao, media);
+            Fracao<BigInteger> erro;
+
+            ImprimirLinhaBiseccao("X1", "XM", "X2", "F(X1)", "F(XM)", "F(X2)", "ERRO");
+            ImprimirLinhaBiseccao(numeroMenor, media, numeroMaior, resultadoNumeroMenor, resultadoNumeroMaior, resultadoMedia, "-");
+            do
+            {
+                if (
+                    ((resultadoNumeroMenor.MenorQue(fracaoZero) && resultadoNumeroMenor.MenorQue(resultadoMedia)) && resultadoMedia.MenorQue(fracaoZero)) ||
+                    ((resultadoNumeroMenor.MaiorQue(fracaoZero) && resultadoNumeroMenor.MaiorQue(resultadoMedia)) && resultadoMedia.MaiorQue(fracaoZero)))
+                    numeroMenor = media;
+                if (
+                    ((resultadoNumeroMaior.MaiorQue(fracaoZero) && resultadoNumeroMaior.MaiorQue(resultadoMedia)) && resultadoMedia.MaiorQue(fracaoZero)) ||
+                    ((resultadoNumeroMaior.MenorQue(fracaoZero) && resultadoNumeroMaior.MenorQue(resultadoMedia)) && resultadoMedia.MenorQue(fracaoZero)))
+                    numeroMaior = media;
+
+                media = Media(numeroMenor, numeroMaior);
+                resultadoNumeroMenor = CalcularEquacao(equacao, numeroMenor);
+                resultadoNumeroMaior = CalcularEquacao(equacao, numeroMaior);
+                resultadoMedia = CalcularEquacao(equacao, media);
+
+                erro = Dividir(Subtrair(media, mediaAnterior), mediaAnterior).TransformarParaPositivo();
+                mediaAnterior = media;
+                ImprimirLinhaBiseccao(numeroMenor, media, numeroMaior, resultadoNumeroMenor, resultadoNumeroMaior, resultadoMedia, erro);
+
+            } while (erro.MaiorQue(erroMinimo));
+
+            Console.WriteLine("Resultado da Bisecção: " + media);
+            Console.WriteLine();
+            Console.WriteLine();
+            return media;
+        }
+
+        public void ImprimirLinhaBiseccao(object numeroMenor, object media, object numeroMaior, object resultadoNumeroMenor, object resultadoNumeroMaior, object resultadoMedia, object erro)
+        {
+            Console.WriteLine("{0}    |{1}    |{2}    |{3}    |{4}     |{5}    |{6}    |", numeroMenor.ToString().PadLeft(15, ' '),
+                media.ToString().PadLeft(15, ' '),
+                numeroMaior.ToString().PadLeft(15, ' '),
+                resultadoNumeroMenor.ToString().PadLeft(15, ' '),
+                resultadoNumeroMaior.ToString().PadLeft(15, ' '),
+                resultadoMedia.ToString().PadLeft(15, ' '),
+                erro.ToString().PadLeft(15, ' '));
+        }
+
+        public IntervaloBiseccao<Fracao<BigInteger>> ObterValoresBiseccao(EquacaoFracaoBigInteger equacao)
+        {
+            Console.WriteLine("Equacao: " + equacao);
+            var fracaoZero = new FracaoBigInteger(0);
+            IntervaloBiseccao<Fracao<BigInteger>> intervaloEncontrado = null;
+            var controlador = 1;
+            var numeroInicial = 0;
+            var numeroFinal = 0;
+
+            const int numeroMaximoIteracoes = 100;
+            for (var iteracao = 1; iteracao <= numeroMaximoIteracoes && intervaloEncontrado == null; iteracao++)
+            {
+                if (controlador > 0)
+                {
+                    numeroFinal += 10;
+                }
+                if (controlador < 0)
+                {
+                    numeroInicial -= 10;
+                }
+                controlador *= -1;
+
+                Fracao<BigInteger> valorInicial = new FracaoBigInteger(numeroInicial);
+                Fracao<BigInteger> valorFinal = new FracaoBigInteger(numeroFinal);
+
+                var numeroAnterior = valorInicial;
+                var resultadoAnterior = CalcularEquacao(equacao, valorInicial);
+
+                ImprimirLinhaBuscaValorBiseccao("X", "F(X)");
+                for (var numeroAtual = valorInicial; numeroAtual.MenorOuIgualQue(valorFinal); numeroAtual = Somar(numeroAtual, new FracaoBigInteger(1)))
+                {
+                    var resultadoAtual = CalcularEquacao(equacao, numeroAtual);
+                    if (intervaloEncontrado == null &&
+                        ((resultadoAnterior.MenorQue(fracaoZero) && resultadoAtual.MaiorOuIgualQue(fracaoZero) || (resultadoAnterior.MaiorQue(fracaoZero) && resultadoAtual.MenorOuIgualQue(fracaoZero)))))
+                    {
+                        intervaloEncontrado = new IntervaloBiseccao<Fracao<BigInteger>>(numeroAnterior, resultadoAnterior, numeroAtual, resultadoAtual);
+                    }
+                    numeroAnterior = numeroAtual;
+                    resultadoAnterior = resultadoAtual;
+                    ImprimirLinhaBuscaValorBiseccao(numeroAtual, resultadoAtual);
+                }
+            }
+
+
+            Console.WriteLine("Primeiro intervalo encontrado: {0}", intervaloEncontrado);
+            Console.WriteLine();
+            Console.WriteLine();
+            return intervaloEncontrado;
+        }
+
+        public void ImprimirLinhaBuscaValorBiseccao(object numero, object resultado)
+        {
+            Console.WriteLine("{0}    |{1}    |", numero.ToString().PadLeft(15, ' '), resultado.ToString().PadLeft(15, ' '));
         }
     }
 }

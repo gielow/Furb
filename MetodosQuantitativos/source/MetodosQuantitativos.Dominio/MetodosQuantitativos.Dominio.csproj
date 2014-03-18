@@ -44,6 +44,8 @@
     <Compile Include="Entidades\Biseccao\IntervaloBiseccao.cs" />
     <Compile Include="Entidades\Equacoes\ElementoEquacaoFracaoLong.cs" />
     <Compile Include="Entidades\Equacoes\EquacaoFracaoLong.cs" />
+    <Compile Include="Entidades\Equacoes\ElementoEquacaoFracaoBigInteger.cs" />
+    <Compile Include="Entidades\Equacoes\EquacaoFracaoBigInteger.cs" />
     <Compile Include="Entidades\Equacoes\ElementoEquacaoFracao.cs" />
     <Compile Include="Entidades\Equacoes\EquacaoFracao.cs" />
     <Compile Include="Entidades\Fracoes\FracaoBigInteger.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Entidades\Equacoes\ElementoEquacao.cs" />
     <Compile Include="Entidades\Equacoes\Equacao.cs" />
     <Compile Include="Entidades\Fracoes\Fracao.cs" />
+    <Compile Include="Extencoes\FracaoBigIntegerExtension.cs" />
     <Compile Include="Extencoes\FracaoLongExtension.cs" />
     <Compile Include="Extencoes\FracaoIntExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

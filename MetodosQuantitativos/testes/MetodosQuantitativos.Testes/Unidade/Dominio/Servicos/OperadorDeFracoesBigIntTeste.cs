@@ -1,6 +1,8 @@
-﻿using System.Data.SqlTypes;
+﻿using System;
+using System.Data.SqlTypes;
 using System.Numerics;
 using FluentAssertions;
+using MetodosQuantitativos.Dominio.Entidades.Equacoes;
 using MetodosQuantitativos.Dominio.Entidades.Fracoes;
 using MetodosQuantitativos.Dominio.Servicos;
 using NUnit.Framework;
@@ -114,8 +116,8 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             resultado.Denominador.Should().Be(BigInteger.Parse(denominadorResultado));
         }
 
-        [TestCase("12500000000000000000000", "2700000000000000000000", 3, "5", "3")]
-        [TestCase("900000000000000000000", "400000000000000000000", 2, "3", "2")]
+        [TestCase("8", "6", 2, "181", "157")]
+        [TestCase("9", "4", 2, "3", "2")]
         public void raiz_quadrada_de_fracoes(string numerador, string denominador, int raiz, string numeradorResultado, string denominadorResultado)
         {
             var fracao = new FracaoBigInteger(BigInteger.Parse(numerador), BigInteger.Parse(denominador));
@@ -125,14 +127,67 @@ namespace MetodosQuantitativos.Testes.Unidade.Dominio.Servicos
             resultado.Denominador.Should().Be(BigInteger.Parse(denominadorResultado));
         }
 
-        [TestCase("5", "2", "3", "1", "11", "4")]
-        public void media_de_duas_fracoes(string numerador1, string denominador1, string numerador2, string denominador2, string numeradorResultado, string denominadorResultado)
+        [TestCase(5, 2, 3, 1, 11, 4)]
+        public void media_de_duas_fracoes(long numerador1, long denominador1, long numerador2, long denominador2, long numeradorResultado, long denominadorResultado)
         {
-            var fracao1 = new FracaoBigInteger(BigInteger.Parse(numerador1), BigInteger.Parse(denominador1));
-            var fracao2 = new FracaoBigInteger(BigInteger.Parse(numerador2), BigInteger.Parse(denominador2));
+            var fracao1 = new FracaoBigInteger(numerador1, denominador1);
+            var fracao2 = new FracaoBigInteger(numerador2, denominador2);
 
             var resultado = operadorDeFracoes.Media(fracao1, fracao2);
-            resultado.Should().Be(new FracaoBigInteger(BigInteger.Parse(numeradorResultado), BigInteger.Parse(denominadorResultado)));
+            resultado.Should().Be(new FracaoBigInteger(numeradorResultado, denominadorResultado));
         }
+
+        [Test]
+        public void realizando_bisseccao_para_obter_a_fracao_aproximada_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracaoBigInteger();
+            equacao.AdicionarElemento(new FracaoBigInteger(1), 2);
+            equacao.AdicionarElemento(new FracaoBigInteger(-8), 0);
+
+            var retorno = operadorDeFracoes.Bisseccao(equacao, new FracaoBigInteger(1, 100));
+            retorno.Should().Be(new FracaoBigInteger(181, 64));
+        }
+
+        [Test]
+        public void buscando_menor_numero_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracaoBigInteger();
+            equacao.AdicionarElemento(new FracaoBigInteger(1), 2);
+            equacao.AdicionarElemento(new FracaoBigInteger(-8), 0);
+
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Menor.Numerador.Should().Be(2);
+        }
+
+        [Test]
+        public void buscando_menor_numero_para_zerar_uma_equacao2()
+        {
+            var equacao = new EquacaoFracaoBigInteger();
+            equacao.AdicionarElemento(new FracaoBigInteger(1), 3);
+            equacao.AdicionarElemento(new FracaoBigInteger(10), 0);
+
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Menor.Numerador.Should().Be(-3);
+        }
+
+        [Test]
+        public void buscando_maior_numero_para_zerar_uma_equacao()
+        {
+            var equacao = new EquacaoFracaoBigInteger();
+            equacao.AdicionarElemento(new FracaoBigInteger(1), 2);
+            equacao.AdicionarElemento(new FracaoBigInteger(-8), 0);
+
+            var retorno = operadorDeFracoes.ObterValoresBiseccao(equacao);
+            retorno.Maior.Numerador.Should().Be(3);
+        }
+
+        [Test]
+        public void calculando_uma_equacao_de_numeros_inteiros_positivos()
+        {
+            var equacao = new EquacaoFracaoBigInteger();
+            equacao.AdicionarElemento(new FracaoBigInteger(1), 2);
+            equacao.AdicionarElemento(new FracaoBigInteger(-8), 0);
+            operadorDeFracoes.CalcularEquacao(equacao, new FracaoBigInteger(11, 4)).Should().Be(new FracaoBigInteger(-7, 16));
+        } 
     }
 }
