@@ -1,0 +1,8 @@
+(defun potencia (x y) (cond ((= x 0)0) ((= y 0)1) (T(* x (potencia x (- y 1))))))
+(defun imc (peso altura) (/ peso (potencia (/ altura 100) 2)))
+(setq peso 80)
+(setq altura 180)
+(setq somamedia 0)
+(loop for i from 1 to 7000000 do (setq somamedia (+ somamedia (imc peso altura))))
+(print (/ somamedia 7000000))
+(read-line)

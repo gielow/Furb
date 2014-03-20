@@ -1,0 +1,6 @@
+(defun potencia (x y) (cond ((= x 0)0) ((= y 0)1) (T(* x (potencia x (- y 1))))))
+(defun imc (peso altura) (/ peso (potencia altura 2)))
+(setq altura 1.80)
+(setq peso 80)
+(print (imc peso altura))
+(read-line)
