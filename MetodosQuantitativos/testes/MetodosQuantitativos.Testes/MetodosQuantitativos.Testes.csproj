@@ -48,19 +48,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unidade\Dominio\Entidades\ElementoEquacaoTeste.cs" />
-    <Compile Include="Unidade\Dominio\Entidades\EquacaoTeste.cs" />
-    <Compile Include="Unidade\Dominio\Entidades\FracaoTeste.cs" />
-    <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesBigIntTeste.cs" />
-    <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesLongTeste.cs" />
-    <Compile Include="Unidade\Dominio\Servicos\OperadorDeFracoesIntTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Biseccao\MetodoBiseccaoTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Equacoes\EquacaoFracaoBigIntegerTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Equacoes\EquacaoFracaoIntTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Equacoes\EquacaoFracaoLongTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Fracoes\FracaoBigIntegerTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Fracoes\FracaoIntTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Fracoes\FracaoLongTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Calculos\FracaoBigIntegerMathTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Calculos\FracaoLongMathTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Calculos\FracaoIntMathTeste.cs" />
+    <Compile Include="Unidade\Operacoes\Newton\MetodoNewtonTeste.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\source\MetodosQuantitativos.Dominio\MetodosQuantitativos.Dominio.csproj">
-      <Project>{00098F4F-8917-4429-BF64-D6D8160DE035}</Project>
-      <Name>MetodosQuantitativos.Dominio</Name>
+    <ProjectReference Include="..\..\source\MetodosQuantitativos.Operacoes\MetodosQuantitativos.Operacoes.csproj">
+      <Project>{CA9CE0FF-BDCA-4B84-9A06-AB86BC33E051}</Project>
+      <Name>MetodosQuantitativos.Operacoes</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
