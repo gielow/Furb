@@ -1,0 +1,8 @@
+package AlgoritmoBusca;
+
+public class Tempo {
+	private int tempo;
+	public Tempo(){
+		
+	}
+}

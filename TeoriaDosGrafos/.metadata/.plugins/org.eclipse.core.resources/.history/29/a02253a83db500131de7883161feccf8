@@ -1,0 +1,6 @@
+package AlgoritmoBusca;
+
+public class ElementoVetorRoteamento {
+	private Vertice verticePai;
+	private Integer tempo;
+}

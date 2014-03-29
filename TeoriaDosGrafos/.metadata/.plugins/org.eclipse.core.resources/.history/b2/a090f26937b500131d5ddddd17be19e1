@@ -1,0 +1,14 @@
+package AlgoritmoBusca;
+
+import java.util.List;
+
+public class Vertice {
+	
+	public Vertice(String nome)	{
+		this.nome = nome;
+		
+	}
+	public List<Vertice> getAdjacencias(){
+		return null;
+	}
+}

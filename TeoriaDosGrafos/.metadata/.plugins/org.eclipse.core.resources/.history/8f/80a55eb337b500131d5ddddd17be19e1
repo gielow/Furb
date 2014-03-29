@@ -1,0 +1,30 @@
+package AlgoritmoBuscaTest;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import AlgoritmoBusca.BuscaEmProfundidade;
+import AlgoritmoBusca.Grafo;
+import AlgoritmoBusca.Vertice;
+
+
+@RunWith(JUnit4.class)
+public class BuscaEmProfundidadeTeste {
+	
+	private BuscaEmProfundidade buscaEmProfundidade;
+	@Before
+	public void setup()
+	{
+		buscaEmProfundidade = new BuscaEmProfundidade();
+	}
+	
+	@Test
+	public void realizarBuscaProfundidade(){
+		Grafo grafo = new Grafo();
+		Vertice vR = new Vertice("R");
+		
+		buscaEmProfundidade.buscar(grafo);
+	}
+}

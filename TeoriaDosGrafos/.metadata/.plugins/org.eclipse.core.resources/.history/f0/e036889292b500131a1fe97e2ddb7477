@@ -1,0 +1,48 @@
+package AlgoritmoBusca;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class BuscaEmProfundidade {
+	
+	public VetorRoteamento buscar(Grafo grafo){
+		Map<Vertice, String> cor = new HashMap<Vertice, String>();
+		Map<Vertice, Integer> d = new HashMap<Vertice, Integer>();
+		Map<Vertice, Integer> f = new HashMap<Vertice, Integer>();
+		VetorRoteamento vetorRoteamento = new VetorRoteamento();
+		
+		for(Vertice u : grafo.getVertices())
+		{
+			System.out.println("Marcando o vertice " + u +" com a cor Branca");
+			cor.put(u, "BRANCO");
+		}
+		Integer tempo = 0;
+		
+		for(Vertice u : grafo.getVertices())
+		{
+			if(cor.get(u) == "BRANCO")
+			{
+				visitarVertice(u, cor, d, f, tempo);
+			}
+		}
+		
+		return vetorRoteamento;
+	}
+	
+	private void visitarVertice(Vertice u, Map<Vertice, String> cor, Map<Vertice, Integer> d, Map<Vertice, Integer> f, Integer tempo)
+	{
+		cor.put(u, "CINZA");
+		tempo++;
+		d.put(u, tempo);
+		
+		for(Vertice v : u.getAdjacencias())
+		{
+			if(cor.get(v) == "BRANCO"){
+				visitarVertice(v, cor, d, f, tempo);
+			}
+		}
+		cor.put(u, "PRETO");
+		tempo++;
+		f.put(u, tempo);
+	}
+}

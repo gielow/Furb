@@ -1,6 +1,8 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using MetodosQuantitativos.Operacoes.Equacoes;
 using MetodosQuantitativos.Operacoes.Fracoes;
+using MetodosQuantitativos.Operacoes.Newnton;
 using NUnit.Framework;
 
 namespace MetodosQuantitativos.Testes.Unidade.Operacoes.Newton
@@ -22,21 +24,30 @@ namespace MetodosQuantitativos.Testes.Unidade.Operacoes.Newton
 
             derivada.Should().Be(derivadaEsperada);
         }
-    }
 
-    public class MetodoNewton
-    {
-        public static EquacaoFracaoInt ObterDerivada(EquacaoFracaoInt funcao)
+        [Test]
+        public void buscando_derivada_de_uma_funcao_com_fracao_int2()
         {
-            var derivada = new EquacaoFracaoInt();
-            foreach (var elementoEquacao in funcao.Elementos)
-            {
-                if (elementoEquacao.Expoente > 0)
-                {
-                    derivada.AdicionarElemento(elementoEquacao.Coeficiente * elementoEquacao.Expoente, elementoEquacao.Expoente -1);
-                }
-            }
-            return derivada;
+            var funcao = new EquacaoFracaoInt();
+            funcao.AdicionarElemento(new FracaoInt(-4), 2);
+            funcao.AdicionarElemento(new FracaoInt(6), 1);
+            funcao.AdicionarElemento(new FracaoInt(7), 0);
+            var derivada = MetodoNewton.ObterDerivada(funcao);
+
+            Console.WriteLine(derivada);
+        }
+
+
+
+        [Test]
+        public void realizando_newton_para_obter_a_fracao_aproximada_para_zerar_uma_equacao_fracao_int()
+        {
+            var funcao = new EquacaoFracaoInt();
+            funcao.AdicionarElemento(new FracaoInt(-4), 2);
+            funcao.AdicionarElemento(new FracaoInt(6), 1);
+            funcao.AdicionarElemento(new FracaoInt(7), 0);
+
+            var resultado = MetodoNewton.Calcular(funcao);
         }
     }
 }

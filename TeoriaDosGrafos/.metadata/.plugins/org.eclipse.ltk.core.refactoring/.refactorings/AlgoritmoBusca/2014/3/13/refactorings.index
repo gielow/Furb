@@ -1,0 +1,12 @@
+1395873581386	Encapsulate field 'nome'
+1395873755001	Encapsulate field 'adjacencias'
+1395876196451	Encapsulate field 'verticePai'
+1395876203794	Encapsulate field 'tempo'
+1395912502180	Encapsulate field 'elementos'
+1395972057654	Copy compilation unit
+1395972063825	Delete element
+1395972131725	Rename package 'AlgoritmoBusca'
+1395972149989	Move compilation unit
+1395972153402	Delete element
+1395972321025	Rename type 'BuscaEmProfundidade'
+1395972339266	Delete element

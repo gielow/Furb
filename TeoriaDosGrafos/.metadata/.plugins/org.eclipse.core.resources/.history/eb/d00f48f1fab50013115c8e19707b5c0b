@@ -1,0 +1,24 @@
+package AlgoritmoBuscaTest;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import AlgoritmoBusca.BuscaEmLargura;
+
+@RunWith(JUnit4.class)
+public class ClassificacaoDoGrafoTeste {
+	private BuscaEmLargura buscaEmLargura;
+	@Before
+	public void setup()
+	{
+		buscaEmLargura = new BuscaEmLargura();
+	}
+	
+	
+	@Test
+	public void realizarBuscaLargura(){
+	}
+}
+	

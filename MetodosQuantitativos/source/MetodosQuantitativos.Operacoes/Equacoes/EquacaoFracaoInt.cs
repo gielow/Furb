@@ -23,9 +23,15 @@ namespace MetodosQuantitativos.Operacoes.Equacoes
             var resultado = new FracaoInt(0);
             foreach (var elementoEquacao in equacao.Elementos)
             {
-                resultado += (valorDeX ^ elementoEquacao.Expoente) * elementoEquacao.Coeficiente;
+                var t = elementoEquacao.Coeficiente * (valorDeX ^ elementoEquacao.Expoente);
+                resultado += t;
             }
             return resultado;
+        }
+
+        public static FracaoInt Calcular(EquacaoFracaoInt equacao, int valorDeX)
+        {
+            return Calcular(equacao, new FracaoInt(valorDeX));
         }
 
         public override string ToString()

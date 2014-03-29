@@ -1,0 +1,14 @@
+package AlgoritmoBuscaTest;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+
+@RunWith(JUnit4.class)
+public class BuscaEmProfundidadeTeste {
+	@Test
+	public void realizarBuscaProfundidade(){
+		
+	}
+}

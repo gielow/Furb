@@ -52,6 +52,7 @@
     <Compile Include="Fracoes\FracaoInt.cs" />
     <Compile Include="Fracoes\FracaoLong.cs" />
     <Compile Include="Calculos\FracaoIntMath.cs" />
+    <Compile Include="Newnton\MetodoNewton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

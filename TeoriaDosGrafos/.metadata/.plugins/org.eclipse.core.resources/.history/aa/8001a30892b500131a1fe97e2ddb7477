@@ -1,0 +1,8 @@
+package AlgoritmoBusca;
+
+public class VetorRoteamento {
+	private List<ElementoVetorRoteamento> elementos;
+	public VetorRoteamento(){
+		
+	}
+}

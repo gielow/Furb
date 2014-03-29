@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using MetodosQuantitativos.Operacoes.Biseccao;
 using MetodosQuantitativos.Operacoes.Equacoes;
 using MetodosQuantitativos.Operacoes.Fracoes;
@@ -138,6 +139,29 @@ namespace MetodosQuantitativos.Testes.Unidade.Operacoes.Biseccao
 
             var retorno = MetodoBiseccao.ObterValoresBiseccao(equacao);
             retorno.Maior.Numerador.Should().Be(3);
+        }
+
+        [Test]
+        public void teste()
+        {
+            var equacao = new EquacaoFracaoInt();
+            equacao.AdicionarElemento(new FracaoInt(-4), 2);
+            equacao.AdicionarElemento(new FracaoInt(6), 1);
+            equacao.AdicionarElemento(new FracaoInt(7), 0);
+
+            MetodoBiseccao.Bisseccao(equacao);
+        }
+
+        [Test]
+        public void teste2()
+        {
+            var equacao = new EquacaoFracaoInt();
+            equacao.AdicionarElemento(new FracaoInt(-4), 2);
+            equacao.AdicionarElemento(new FracaoInt(6), 1);
+            equacao.AdicionarElemento(new FracaoInt(7), 0);
+            var resultado =  EquacaoFracaoInt.Calcular(equacao, new FracaoInt(2));
+            Console.WriteLine(resultado);
+
         }
     }
 }
