@@ -49,6 +49,7 @@ var game = {
 		me.entityPool.add("mainPlayer", game.PlayerEntity);
         me.entityPool.add("CoinEntity", game.CoinEntity);
         me.entityPool.add("EnemyEntity", game.EnemyEntity);
+        me.entityPool.add("Npc", game.NpcEntity);
 			
 		// enable the keyboard
         me.input.bindKey(me.input.KEY.UP,     "up");
