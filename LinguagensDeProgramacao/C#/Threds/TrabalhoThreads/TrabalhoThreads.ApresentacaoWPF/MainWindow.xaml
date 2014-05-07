@@ -1,0 +1,13 @@
+﻿<Window x:Class="TrabalhoThreads.ApresentacaoWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Canvas>
+        <Canvas Height="78" Name="cv" Canvas.Left="10" Canvas.Top="110" Width="487"/>
+        <Button Content="Iniciar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="ButtonIniciar_Click_1" Canvas.Left="23" Canvas.Top="288"/>
+        <Button Content="Parar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="ButtonParar_Click_1" Canvas.Left="103" Canvas.Top="288"/>
+        <Button Content="Inserir Not" Canvas.Left="413" Canvas.Top="288" Width="75" Click="Button_Click"/>
+        
+
+    </Canvas>
+</Window>

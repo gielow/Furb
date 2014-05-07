@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consumidor.cs" />
+    <Compile Include="Estatisticas.cs" />
     <Compile Include="Produtor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recursos\Recurso.cs" />
