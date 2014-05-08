@@ -1,0 +1,8 @@
+1398079800442	Encapsulate field 'noPrincipal'
+1398079809890	Encapsulate field 'peso'
+1398079815506	Encapsulate field 'valor'
+1398079819632	Encapsulate field 'noEsquerdo'
+1398079823409	Encapsulate field 'noDireito'
+1398082541974	Encapsulate field 'letra'
+1398082547477	Encapsulate field 'frequencia'
+1398082713244	Rename local variable 'f'

@@ -8,7 +8,7 @@ namespace MetodosQuantitativos.Operacoes.Biseccao
     {
         public static FracaoInt Bisseccao(EquacaoFracaoInt equacao)
         {
-            return Bisseccao(equacao, new FracaoInt(1, 1000));
+            return Bisseccao(equacao, new FracaoInt(1, 100));
         }
 
         public static FracaoInt Bisseccao(EquacaoFracaoInt equacao, FracaoInt erroMinimo)
@@ -41,7 +41,7 @@ namespace MetodosQuantitativos.Operacoes.Biseccao
             FracaoInt erro;
 
             ImprimirLinhaBiseccao("X1", "XM", "X2", "F(X1)", "F(XM)", "F(X2)", "ERRO");
-            ImprimirLinhaBiseccao(numeroMenor, media, numeroMaior, resultadoNumeroMenor, resultadoNumeroMaior, resultadoMedia, "-");
+            ImprimirLinhaBiseccao(numeroMenor, media, numeroMaior, resultadoNumeroMenor, resultadoMedia, resultadoNumeroMaior, "-");
             do
             {
                 if (((resultadoNumeroMenor < 0 && resultadoNumeroMenor < resultadoMedia) && resultadoMedia < 0) || ((resultadoNumeroMenor > 0 && resultadoNumeroMenor > resultadoMedia) && resultadoMedia > 0))
@@ -56,7 +56,7 @@ namespace MetodosQuantitativos.Operacoes.Biseccao
 
                 erro = ((media - mediaAnterior) / mediaAnterior).TransformarParaPositivo();
                 mediaAnterior = media;
-                ImprimirLinhaBiseccao(numeroMenor, media, numeroMaior, resultadoNumeroMenor, resultadoNumeroMaior, resultadoMedia, erro);
+                ImprimirLinhaBiseccao(numeroMenor, media, numeroMaior, resultadoNumeroMenor, resultadoMedia, resultadoNumeroMaior, erro);
 
             } while (erro > erroMinimo);
 

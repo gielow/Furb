@@ -42,12 +42,21 @@ namespace MetodosQuantitativos.Testes.Unidade.Operacoes.Newton
         [Test]
         public void realizando_newton_para_obter_a_fracao_aproximada_para_zerar_uma_equacao_fracao_int()
         {
-            var funcao = new EquacaoFracaoInt();
-            funcao.AdicionarElemento(new FracaoInt(-4), 2);
-            funcao.AdicionarElemento(new FracaoInt(6), 1);
-            funcao.AdicionarElemento(new FracaoInt(7), 0);
+            var funcao = new EquacaoFracaoDecimal();
+            funcao.AdicionarElemento(-1, 3);
+            funcao.AdicionarElemento(2, 2);
+            funcao.AdicionarElemento(-3, 1);
+            funcao.AdicionarElemento(4, 0);
 
-            var resultado = MetodoNewton.Calcular(funcao);
+            var resultado = MetodoNewton.Calcular(funcao, 0.0001);
+        }
+
+        [Test]
+        public void erro()
+        {
+            Console.WriteLine((1 - 1) / 1);
+            Console.WriteLine((1.7142857142 - 2) / 2);
+            Console.WriteLine((1.6531452087 - 1.7142857142) / 1.7142857142);
         }
     }
 }

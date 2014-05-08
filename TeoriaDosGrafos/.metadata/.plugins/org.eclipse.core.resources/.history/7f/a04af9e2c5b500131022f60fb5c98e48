@@ -1,7 +1,0 @@
-package AlgoritmoBusca;
-
-public class BuscaEmLargura {
-	public VetorRoteamento buscar(Grafo grafo){
-		return null.
-	}
-}

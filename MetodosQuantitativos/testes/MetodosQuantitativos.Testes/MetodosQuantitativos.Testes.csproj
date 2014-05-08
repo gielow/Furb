@@ -59,6 +59,7 @@
     <Compile Include="Unidade\Operacoes\Calculos\FracaoLongMathTeste.cs" />
     <Compile Include="Unidade\Operacoes\Calculos\FracaoIntMathTeste.cs" />
     <Compile Include="Unidade\Operacoes\Newton\MetodoNewtonTeste.cs" />
+    <Compile Include="Unidade\Prova\ProvaTeste.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\source\MetodosQuantitativos.Operacoes\MetodosQuantitativos.Operacoes.csproj">

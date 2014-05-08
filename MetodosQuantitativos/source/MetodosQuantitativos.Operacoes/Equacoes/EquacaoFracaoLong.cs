@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MetodosQuantitativos.Operacoes.Fracoes;
 
@@ -23,7 +24,9 @@ namespace MetodosQuantitativos.Operacoes.Equacoes
             var resultado = new FracaoLong(0);
             foreach (var elementoEquacao in equacao.Elementos)
             {
-                resultado += (valorDeX ^ elementoEquacao.Expoente) * elementoEquacao.Coeficiente;
+                var resultadoCalculo = (valorDeX ^ elementoEquacao.Expoente)*elementoEquacao.Coeficiente;
+                //Console.WriteLine(resultadoCalculo);
+                resultado += resultadoCalculo;
             }
             return resultado;
         }

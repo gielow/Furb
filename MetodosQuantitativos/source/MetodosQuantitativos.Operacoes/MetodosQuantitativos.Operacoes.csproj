@@ -46,6 +46,7 @@
     <Compile Include="Calculos\FracaoBigIntegerMath.cs" />
     <Compile Include="Calculos\FracaoLongMath.cs" />
     <Compile Include="Equacoes\EquacaoFracaoBigInteger.cs" />
+    <Compile Include="Equacoes\EquacaoFracaoDecimal.cs" />
     <Compile Include="Equacoes\EquacaoFracaoLong.cs" />
     <Compile Include="Equacoes\EquacaoFracaoInt.cs" />
     <Compile Include="Fracoes\FracaoBigInteger.cs" />
