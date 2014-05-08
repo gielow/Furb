@@ -1,55 +1,52 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
 using TrabalhoThreads.Enum;
+using TrabalhoThreads.Recursos;
 
 namespace TrabalhoThreads
 {
     public class Estatisticas
     {
-        private readonly ConcurrentQueue<Notificacao> filaDeNotificacoes;
+        private readonly ConcurrentQueue<Relatorio> filaDeRelatoriosGerados;
+        private readonly ConcurrentQueue<Relatorio> filaDeRelatoriosImpressos;
         private Thread monitorador;
-        private StatusProducao status;
+        private StatusProcesso status;
 
-        public Estatisticas(ConcurrentQueue<Notificacao> filaDeNotificacoes)
+        public Estatisticas(ConcurrentQueue<Relatorio> filaDeRelatoriosGerados, ConcurrentQueue<Relatorio> filaDeRelatoriosImpressos)
         {
-            this.filaDeNotificacoes = filaDeNotificacoes;
-            status= StatusProducao.Parado;
+            this.filaDeRelatoriosGerados = filaDeRelatoriosGerados;
+            this.filaDeRelatoriosImpressos = filaDeRelatoriosImpressos;
+            status= StatusProcesso.Parado;
         }
 
-        public delegate void NovaMateriaProduzida();
+        public delegate void NotificadorRelatoriosGerados(int quantidade);
+        public event NotificadorRelatoriosGerados NotificadoresDeRelatoriosGerados;
 
-        public event NovaMateriaProduzida NotificadoresDeNovaMateriaProduzida;
-
+        public delegate void NotificadorRelatoriosImpressos(int quantidade);
+        public event NotificadorRelatoriosImpressos NotificadoresDeRelatoriosImpressos;
         
         public void Iniciar()
         {
-            status = StatusProducao.Produzindo;
+            status = StatusProcesso.Executando;
             monitorador = new Thread(Monitorar);
             monitorador.Start();
         }
 
         public void Monitorar()
         {
-            while (status == StatusProducao.Produzindo)
+            while (status == StatusProcesso.Executando)
             {
-                Notificacao notificacao;
-                while (filaDeNotificacoes.TryDequeue(out notificacao))
-                {
-                    if(NotificadoresDeNovaMateriaProduzida != null)
-                        NotificadoresDeNovaMateriaProduzida.Invoke();
-                }
+                NotificadoresDeRelatoriosGerados.Invoke(filaDeRelatoriosGerados.Count);
+                NotificadoresDeRelatoriosImpressos.Invoke(filaDeRelatoriosImpressos.Count);
+
                 Thread.Sleep(500);
             }
         }
 
         public void Parar()
         {
-            status = StatusProducao.Produzindo;
+            status = StatusProcesso.Executando;
             monitorador.Join();
         }
-    }
-
-    public class Notificacao
-    {
     }
 }

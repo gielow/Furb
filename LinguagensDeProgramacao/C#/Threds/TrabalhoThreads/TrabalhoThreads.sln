@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabalhoThreads", "TrabalhoThreads\TrabalhoThreads.csproj", "{E4D3FD0E-C3C5-40BC-AA39-89DBFDB0C716}"

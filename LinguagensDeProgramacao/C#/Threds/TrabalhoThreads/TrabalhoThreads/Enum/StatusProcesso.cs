@@ -1,8 +1,8 @@
 ﻿namespace TrabalhoThreads.Enum
 {
-    internal enum StatusProducao
+    internal enum StatusProcesso
     {
         Parado = 0,
-        Produzindo = 1,
+        Executando = 1,
     }
 }

@@ -43,8 +43,8 @@
     <Compile Include="Estatisticas.cs" />
     <Compile Include="Produtor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recursos\Recurso.cs" />
-    <Compile Include="Enum\StatusProducao.cs" />
+    <Compile Include="Recursos\Relatorio.cs" />
+    <Compile Include="Enum\StatusProcesso.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

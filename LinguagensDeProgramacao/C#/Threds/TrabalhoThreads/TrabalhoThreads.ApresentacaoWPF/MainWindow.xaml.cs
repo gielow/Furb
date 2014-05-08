@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrabalhoThreads.Recursos;
 
 namespace TrabalhoThreads.ApresentacaoWPF
 {
@@ -22,14 +23,34 @@ namespace TrabalhoThreads.ApresentacaoWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ConcurrentQueue<Notificacao> notificacoes = new ConcurrentQueue<Notificacao>();
+        private readonly ConcurrentQueue<Relatorio> filaDeRelatoriosGerados = new ConcurrentQueue<Relatorio>();
+        private readonly ConcurrentQueue<Relatorio> filaDeRelatoriosImpressos = new ConcurrentQueue<Relatorio>();
         private Estatisticas est;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            est = new Estatisticas(notificacoes);
-            est.NotificadoresDeNovaMateriaProduzida += est_NotificadoresDeNovaMateriaProduzida;
+
+            est = new Estatisticas(filaDeRelatoriosGerados, filaDeRelatoriosImpressos);
+            est.NotificadoresDeRelatoriosGerados += est_NotificadoresDeRelatoriosGerados;
+            est.NotificadoresDeRelatoriosImpressos += est_NotificadoresDeRelatoriosImpressos;
+        }
+
+        void est_NotificadoresDeRelatoriosImpressos(int quantidade)
+        {
+            this.Dispatcher.Invoke((Action) (() =>
+            {
+                QtdRelatoriosImpressos.Content = quantidade;
+            }));
+        }
+
+        void est_NotificadoresDeRelatoriosGerados(int quantidade)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                QtdRelatoriosGerados.Content = quantidade;
+            }));
         }
 
         void est_NotificadoresDeNovaMateriaProduzida()
@@ -65,10 +86,14 @@ namespace TrabalhoThreads.ApresentacaoWPF
             est.Parar();
         }
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonGerarRel_Click1(object sender, RoutedEventArgs e)
         {
-            notificacoes.Enqueue(new Notificacao());
+            filaDeRelatoriosGerados.Enqueue(new Relatorio(""));
+        }
+
+        private void ButtonImprimirRel_Click(object sender, RoutedEventArgs e)
+        {
+            filaDeRelatoriosImpressos.Enqueue(new Relatorio(""));
         }
     }
 }

@@ -13,15 +13,15 @@ namespace TrabalhoThreads.Apresentacao
 {
     public partial class Form1 : Form
     {
-        private ConcurrentQueue<Recurso> recursos;
+        private ConcurrentQueue<Relatorio> filaDeRelatoriosImpressos;
+        private ConcurrentQueue<Relatorio> filaDeRelatoriosGerados;
         private Produtor produtor;
         private Consumidor consumidor;
 
         public Form1()
         {
-            recursos = new ConcurrentQueue<Recurso>();
-            produtor = new Produtor(recursos, 10);
-            consumidor = new Consumidor(recursos);
+            produtor = new Produtor(filaDeRelatoriosGerados, 10);
+            consumidor = new Consumidor(filaDeRelatoriosGerados, filaDeRelatoriosImpressos);
             InitializeComponent();
         }
 

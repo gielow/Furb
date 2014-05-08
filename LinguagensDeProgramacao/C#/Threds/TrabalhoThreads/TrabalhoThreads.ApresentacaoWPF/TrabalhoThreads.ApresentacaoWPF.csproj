@@ -61,6 +61,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ext\ExtensionMethods.cs" />
+    <Compile Include="ext\ImageBehavior.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -100,6 +102,12 @@
       <Project>{e4d3fd0e-c3c5-40bc-aa39-89dbfdb0c716}</Project>
       <Name>TrabalhoThreads</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\digitador.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="digitador.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,7 +11,7 @@ namespace TrabalhoTheads.Testes
         [Test]
         public void deve_criar_pelo_menor_um_recurso_ao_iniciar_producao()
         {
-            var linhaDeProducao = new ConcurrentQueue<Recurso>();
+            var linhaDeProducao = new ConcurrentQueue<Relatorio>();
             var produtor = new Produtor(linhaDeProducao, 10);
             linhaDeProducao.Count.Should().Be(0);
             produtor.CriarNovoProdutor();
@@ -22,7 +22,7 @@ namespace TrabalhoTheads.Testes
         [Test]
         public void deve_respeitar_o_limite_de_producao()
         {
-            var linhaDeProducao = new ConcurrentQueue<Recurso>();
+            var linhaDeProducao = new ConcurrentQueue<Relatorio>();
             var produtor = new Produtor(linhaDeProducao, 1);
             linhaDeProducao.Count.Should().Be(0);
             produtor.CriarNovoProdutor();

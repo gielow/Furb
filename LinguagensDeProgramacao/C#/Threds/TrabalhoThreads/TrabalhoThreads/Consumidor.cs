@@ -9,21 +9,23 @@ namespace TrabalhoThreads
 {
     public class Consumidor
     {
-        private readonly ConcurrentQueue<Recurso> recursos;
-        private StatusProducao status;
+        private readonly ConcurrentQueue<Relatorio> filaDeRelatoriosGerados;
+        private readonly ConcurrentQueue<Relatorio> filaDeRelatoriosImpressos;
+        private StatusProcesso status;
         private readonly IDictionary<string, Thread> produtoresDeProdutos;
         private readonly object locker = new object();
 
-        public Consumidor(ConcurrentQueue<Recurso> recursos)
+        public Consumidor(ConcurrentQueue<Relatorio> filaDeRelatoriosGerados, ConcurrentQueue<Relatorio> filaDeRelatoriosImpressos)
         {
             produtoresDeProdutos = new Dictionary<string, Thread>();
-            status = StatusProducao.Parado;
-            this.recursos = recursos;
+            status = StatusProcesso.Parado;
+            this.filaDeRelatoriosGerados = filaDeRelatoriosGerados;
+            this.filaDeRelatoriosImpressos = filaDeRelatoriosImpressos;
         }
 
         public void CriarNovoConsumidor()
         {
-            status = StatusProducao.Produzindo;
+            status = StatusProcesso.Executando;
             var threadDeProducao = new Thread(ProduzirProdutos)
             {
                 Name = "Consumidor_" + produtoresDeProdutos.Count
@@ -34,7 +36,7 @@ namespace TrabalhoThreads
 
         public void PararProdutores()
         {
-            status = StatusProducao.Parado;
+            status = StatusProcesso.Parado;
             foreach (var thread in produtoresDeProdutos.Values)
             {
                 thread.Join();
@@ -47,14 +49,15 @@ namespace TrabalhoThreads
             {
                 lock (locker)
                 {
-                    Recurso recurso;
-                    if (recursos.TryDequeue(out recurso))
+                    Relatorio relatorio;
+                    if (filaDeRelatoriosGerados.TryDequeue(out relatorio))
                     {
-                        Console.WriteLine(Thread.CurrentThread.Name + ": Retirei um recurso e produzi 5 tábuas");
+                        filaDeRelatoriosImpressos.Enqueue(relatorio);
+                        Console.WriteLine(Thread.CurrentThread.Name + ": Retirei um relatorio e enviei para a impressora");
                     }
                 }
                 Thread.Sleep(1000);
-            } while (status == StatusProducao.Produzindo);
+            } while (status == StatusProcesso.Executando);
         }
     }
 }

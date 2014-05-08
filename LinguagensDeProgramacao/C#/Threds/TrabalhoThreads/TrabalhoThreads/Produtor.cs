@@ -10,22 +10,22 @@ namespace TrabalhoThreads
     public class Produtor
     {
         private readonly IDictionary<string, Thread> produtoresDeRecursos;
-        private readonly ConcurrentQueue<Recurso> recursos;
+        private readonly ConcurrentQueue<Relatorio> recursos;
         private readonly int limite;
-        private StatusProducao status;
+        private StatusProcesso status;
         private static readonly object locker = new object();
 
-        public Produtor(ConcurrentQueue<Recurso> recursos, int limite)
+        public Produtor(ConcurrentQueue<Relatorio> recursos, int limite)
         {
             produtoresDeRecursos = new Dictionary<string, Thread>();
-            status = StatusProducao.Parado;
+            status = StatusProcesso.Parado;
             this.recursos = recursos;
             this.limite = limite;
         }
 
         public void CriarNovoProdutor()
         {
-            status = StatusProducao.Produzindo;
+            status = StatusProcesso.Executando;
             var threadDeProducao = new Thread(ProduzirRecursos)
             {
                 Name = "Produtor_" + produtoresDeRecursos.Count
@@ -36,7 +36,7 @@ namespace TrabalhoThreads
 
         public void PararProdutores()
         {
-            status = StatusProducao.Parado;
+            status = StatusProcesso.Parado;
             foreach (var thread in produtoresDeRecursos.Values)
             {
                 thread.Join();
@@ -51,12 +51,12 @@ namespace TrabalhoThreads
                 {
                     if (recursos.Count < limite)
                     {
-                        recursos.Enqueue(new Recurso());
-                        Console.WriteLine(Thread.CurrentThread.Name + ": Produzi um recurso");
+                        recursos.Enqueue(new Relatorio("REL_" + new Random().Next(1000, 9999)));
+                        Console.WriteLine(Thread.CurrentThread.Name + ": Gerei um relatório");
                     }
                 }
                 Thread.Sleep(1000);
-            } while (status == StatusProducao.Produzindo);
+            } while (status == StatusProcesso.Executando);
         }
     }
 }
