@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TrabalhoThreads.Recursos
+﻿namespace TrabalhoThreads.Entidades
 {
     public class Relatorio
     {
@@ -10,6 +8,6 @@ namespace TrabalhoThreads.Recursos
         }
 
         public string Id { get; set; }
-        public IList<string> Dados { get; private set; }
+        public string Conteudo { get; set; }
     }
 }

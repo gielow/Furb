@@ -15,13 +15,13 @@ namespace TrabalhoThreads.Apresentacao
     {
         private ConcurrentQueue<Relatorio> filaDeRelatoriosImpressos;
         private ConcurrentQueue<Relatorio> filaDeRelatoriosGerados;
-        private Produtor produtor;
-        private Consumidor consumidor;
+        private readonly Produtor produtor;
+        private readonly ConsumidorImpressao consumidorImpressao;
 
         public Form1()
         {
             produtor = new Produtor(filaDeRelatoriosGerados, 10);
-            consumidor = new Consumidor(filaDeRelatoriosGerados, filaDeRelatoriosImpressos);
+            consumidorImpressao = new ConsumidorImpressao(filaDeRelatoriosGerados, filaDeRelatoriosImpressos);
             InitializeComponent();
         }
 
@@ -30,7 +30,7 @@ namespace TrabalhoThreads.Apresentacao
         private void button1_Click(object sender, EventArgs e)
         {
             produtor.CriarNovoProdutor();
-            consumidor.CriarNovoConsumidor();
+            consumidorImpressao.CriarNovoConsumidor();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabalhoThreads", "Trabalho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabalhoTheads.Testes", "TrabalhoTheads.Testes\TrabalhoTheads.Testes.csproj", "{6CA89303-B358-4CD6-ABEC-0A40877EB1C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabalhoThreads.Apresentacao", "TrabalhoThreads.Apresentacao\TrabalhoThreads.Apresentacao.csproj", "{19EFD034-1B02-4E44-95B7-7771167C1BF2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabalhoThreads.ApresentacaoWPF", "TrabalhoThreads.ApresentacaoWPF\TrabalhoThreads.ApresentacaoWPF.csproj", "{554FCE82-3F7C-4969-9D8C-3CE32E6E6B32}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{6CA89303-B358-4CD6-ABEC-0A40877EB1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CA89303-B358-4CD6-ABEC-0A40877EB1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CA89303-B358-4CD6-ABEC-0A40877EB1C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19EFD034-1B02-4E44-95B7-7771167C1BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19EFD034-1B02-4E44-95B7-7771167C1BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19EFD034-1B02-4E44-95B7-7771167C1BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19EFD034-1B02-4E44-95B7-7771167C1BF2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{554FCE82-3F7C-4969-9D8C-3CE32E6E6B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{554FCE82-3F7C-4969-9D8C-3CE32E6E6B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554FCE82-3F7C-4969-9D8C-3CE32E6E6B32}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -2,17 +2,27 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:TrabalhoThreads.ApresentacaoWPF.ext"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="558" Width="706">
     <Canvas>
-        <Canvas Height="78" Name="cv" Canvas.Left="10" Canvas.Top="110" Width="487"/>
-        <Button Content="Iniciar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="ButtonIniciar_Click_1" Canvas.Left="23" Canvas.Top="288"/>
-        <Button Content="Parar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="ButtonParar_Click_1" Canvas.Left="103" Canvas.Top="288"/>
-        <Button Content="Gerar Rel." Canvas.Left="333" Canvas.Top="288" Width="75" Click="ButtonGerarRel_Click1"/>
-        <Button Content="Imprimir Rel." Canvas.Left="416" Canvas.Top="288" Width="75" Click="ButtonImprimirRel_Click"/>
-        <Label Canvas.Left="333" Canvas.Top="6" Content="Relatórios gerados:" Height="28" Name="LabelQtdRelatoriosGerados" />
-        <Label Canvas.Left="450" Canvas.Top="6" Content="0" Height="28" Name="QtdRelatoriosGerados" />
-        <Label Canvas.Left="323" Canvas.Top="27" Content="Relatórios Impressos:" Height="28" Name="LabelQtdRelatoriosImpressos" />
-        <Label Canvas.Left="450" Canvas.Top="30" Content="0" Height="28" Name="QtdRelatoriosImpressos" />
-        <Image my:ImageBehavior.AnimatedSource="/img/digitador.gif" Stretch="None" Height="100" Width="100" />
+        <Label Canvas.Left="10" Canvas.Top="10" Content="Máx. fila impressão:" Height="28" Name="LabelQtdMaxFilaImpressao" />
+        <TextBox Height="19" Canvas.Left="125" TextWrapping="Wrap" Text="10" Canvas.Top="15" Width="38" Name="TbQtdMaxFilaImpressao"/>
+        <Label Canvas.Left="29" Canvas.Top="36" Content="Máx. fila e-mail:" Height="28" x:Name="LabelQtdMaxFilaEmail" />
+        <TextBox Height="19" Canvas.Left="125" TextWrapping="Wrap" Text="10" Canvas.Top="40" Width="38" x:Name="TbQtdMaxFilaEmail"/>
+        <Label Canvas.Left="214" Canvas.Top="8" Content="Fila de impressão (000/000)" Height="24" Name="LabelQtdFilaImpressao" />
+        <ProgressBar Height="19" Canvas.Left="375" Canvas.Top="13" Width="313" Name="PbFilaImpressao"/>
+        <Label Canvas.Left="228" Canvas.Top="32" Content="Fila de e-email (000/000)" Height="24" x:Name="LabelQtdFilaEmail" />
+        <ProgressBar Height="19" Canvas.Left="375" Canvas.Top="39" Width="313" x:Name="PbFilaEmail"/>
+        <Button Content="Iniciar Produtor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Click="ButtonIniciar_Click_1" Canvas.Left="19" Canvas.Top="78"/>
+        <Button Content="Iniciar Consumidor Email" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Click="ButtonParar_Click_1" Canvas.Left="243" Canvas.Top="78"/>
+        <Button Content="Iniciar Consumidor Impressão" Canvas.Left="478" Canvas.Top="78" Width="171" Click="ButtonAtualizar_Click"/>
+        <Button Canvas.Left="170" Canvas.Top="40" Content="." Height="21" Name="BtnAtualizar" Width="20" Click="ButtonAtualizatConfig_Click" />
+        
+        <Canvas Height="401" Canvas.Left="10" Canvas.Top="8" Width="678" Name="CanvasAnimate">
+            <Button Canvas.Left="183" Canvas.Top="70" Content="." Height="20" Name="BtnPararProdutores" Width="19" Click="BtnPararProdutores_Click" />
+            <Button Canvas.Left="408" Canvas.Top="70" Content="." Height="20" Name="BtnPararEmail" Width="19" Click="BtnPararEmail_Click"/>
+            <Button Canvas.Left="643" Canvas.Top="70" Content="." Height="20" Name="BtnPararImpressao" Width="19" Click="BtnPararImpressao_Click"/>
+        </Canvas>
+        <Image Name="Fila1" Height="100" Canvas.Left="413" Canvas.Top="210" Width="100"/>
+        <Button Canvas.Left="554" Canvas.Top="481" Content="Parar" Height="23" Name="BtnPararExecucao" Width="118" Click="PararTudo_Click" />
     </Canvas>
 </Window>
