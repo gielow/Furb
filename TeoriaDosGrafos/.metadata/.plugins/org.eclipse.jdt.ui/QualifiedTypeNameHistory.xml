@@ -9,7 +9,6 @@
 <fullyQualifiedTypeName name="AlgoritmoBusca.ElementoVetorRoteamento"/>
 <fullyQualifiedTypeName name="Utils.Strings"/>
 <fullyQualifiedTypeName name="AlgoritmoBusca.VetorRoteamento"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="AlgoritmoBusca.BuscaEmLargura"/>
 <fullyQualifiedTypeName name="AlgoritmoBusca.ClassificacaoDoGrafo"/>
 <fullyQualifiedTypeName name="Questao5.ClassificacaoDoGrafo"/>
@@ -30,4 +29,11 @@
 <fullyQualifiedTypeName name="org.junit.Assert"/>
 <fullyQualifiedTypeName name="java.util.TreeMap"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
+<fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="org.junit.runner.notification.StoppedByUserException"/>
 </qualifiedTypeNameHistroy>
