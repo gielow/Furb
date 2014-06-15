@@ -113,6 +113,8 @@
     <Content Include="img\impressora.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="img\start.png" />
+    <Resource Include="img\stop.png" />
     <Resource Include="img\email-0.png" />
   </ItemGroup>
   <ItemGroup>

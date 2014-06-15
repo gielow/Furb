@@ -150,7 +150,7 @@ namespace TrabalhoThreads.ApresentacaoWPF
 
         private void PararTudo()
         {
-            PararProdutores();
+            PararProdutor();
             PararEnvioEmail();
             PararEnvioImpressao();
         }
@@ -162,7 +162,7 @@ namespace TrabalhoThreads.ApresentacaoWPF
 
         private void BtnPararProdutores_Click(object sender, RoutedEventArgs e)
         {
-            PararProdutores();
+            PararProdutor();
         }
 
         private void BtnPararEmail_Click(object sender, RoutedEventArgs e)
@@ -209,7 +209,7 @@ namespace TrabalhoThreads.ApresentacaoWPF
             tk.Start();
         }
 
-        private void PararProdutores()
+        private void PararProdutor()
         {
             var tk = new Task(() =>
             {

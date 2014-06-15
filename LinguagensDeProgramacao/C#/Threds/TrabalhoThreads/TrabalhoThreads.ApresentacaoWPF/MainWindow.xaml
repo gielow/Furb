@@ -15,12 +15,28 @@
         <Button Content="Iniciar Produtor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Click="ButtonIniciar_Click_1" Canvas.Left="19" Canvas.Top="78"/>
         <Button Content="Iniciar Consumidor Email" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Click="ButtonParar_Click_1" Canvas.Left="243" Canvas.Top="78"/>
         <Button Content="Iniciar Consumidor Impressão" Canvas.Left="478" Canvas.Top="78" Width="171" Click="ButtonAtualizar_Click"/>
-        <Button Canvas.Left="170" Canvas.Top="40" Content="." Height="21" Name="BtnAtualizar" Width="20" Click="ButtonAtualizatConfig_Click" />
+        <Button Canvas.Left="170" Canvas.Top="40" Height="21" Name="BtnAtualizar" Width="20" Click="ButtonAtualizatConfig_Click" BorderBrush="#00000000">
+            <Button.Background>
+                <ImageBrush ImageSource="img/start.png"></ImageBrush>
+            </Button.Background>
+        </Button>
         
         <Canvas Height="401" Canvas.Left="10" Canvas.Top="8" Width="678" Name="CanvasAnimate">
-            <Button Canvas.Left="183" Canvas.Top="70" Content="." Height="20" Name="BtnPararProdutores" Width="19" Click="BtnPararProdutores_Click" />
-            <Button Canvas.Left="408" Canvas.Top="70" Content="." Height="20" Name="BtnPararEmail" Width="19" Click="BtnPararEmail_Click"/>
-            <Button Canvas.Left="643" Canvas.Top="70" Content="." Height="20" Name="BtnPararImpressao" Width="19" Click="BtnPararImpressao_Click"/>
+            <Button Canvas.Left="183" Canvas.Top="70" Height="20" Name="BtnPararProdutores" Width="19" Click="BtnPararProdutores_Click" BorderBrush="#00000000">
+                <Button.Background>
+                    <ImageBrush ImageSource="img/stop.png"></ImageBrush>
+                </Button.Background>
+            </Button>
+            <Button Canvas.Left="408" Canvas.Top="70" Height="20" Name="BtnPararEmail" Width="19" Click="BtnPararEmail_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="img/stop.png"></ImageBrush>
+                </Button.Background>
+            </Button>
+            <Button Canvas.Left="643" Canvas.Top="70" Height="20" Name="BtnPararImpressao" Width="19" Click="BtnPararImpressao_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="img/stop.png"></ImageBrush>
+                </Button.Background>
+            </Button>
         </Canvas>
         <Image Name="Fila1" Height="100" Canvas.Left="413" Canvas.Top="210" Width="100"/>
         <Button Canvas.Left="554" Canvas.Top="481" Content="Parar" Height="23" Name="BtnPararExecucao" Width="118" Click="PararTudo_Click" />

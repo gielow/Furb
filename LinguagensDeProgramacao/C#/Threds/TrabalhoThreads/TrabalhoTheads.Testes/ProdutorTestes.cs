@@ -12,6 +12,13 @@ namespace TrabalhoTheads.Testes
 {
     public class ProdutorTestes
     {
+
+        [Test]
+        public void a()
+        {
+            ComunidadorImpressora.EnviarTextoParaImpressora("PDFCreator", "Teste", "teste.txt");
+        }
+
         [Test]
         public void deve_criar_pelo_menor_um_recurso_ao_iniciar_producao()
         {
