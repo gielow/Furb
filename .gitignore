@@ -26,6 +26,7 @@ Thumbs.db
 [Bb]in
 [Dd]ebug*/
 [Dd]EBUG_SERVICO*/
+.metadata*/
 *.lib
 *.sbr
 obj/
